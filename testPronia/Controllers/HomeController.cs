@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using testPronia.DAL;
 using testPronia.Models;
+using testPronia.ModelViews;
 
 namespace testPronia.Controllers
 {
@@ -11,12 +12,29 @@ namespace testPronia.Controllers
         {
             _context = context;   
         }
+        List<Slide> Slides = new()
+        {
+            new Slide() {Id=1,Title="Title1",SubTitle="Subtitle1",Description="Description1",SlideImageUrl="1-1-524x617.png"},
 
+            new Slide() {Id=1,Title="Title2",SubTitle="Subtitle2",Description="Description2",SlideImageUrl="1-2-524x617.png"} 
+        };
+       
         
         public IActionResult Index()
         {
-            List<Product> products = _context.Products.Take(8).OrderBy(p=>p.Id).ToList();
-            return View(products);
+            
+            List<Product> Products = _context.Products.Take(8).OrderBy(p=>p.Id).ToList();
+
+            List<Slide> Slides = new()
+        {
+            new Slide() {Id=1,Title="Title1",SubTitle="Subtitle1",Description="Description1",SlideImageUrl="1-1-524x617.png"},
+
+            new Slide() {Id=1,Title="Title2",SubTitle="Subtitle2",Description="Description2",SlideImageUrl="1-2-524x617.png"}
+        };
+
+            VM vm = new() {slides=Slides, products=Products };
+
+            return View(vm);
         }
     }
 }
