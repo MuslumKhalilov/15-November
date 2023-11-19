@@ -11,7 +11,11 @@ namespace testPronia.DAL
         }
 
         public DbSet<Product> Products { get; set; }
-            
-        
+
+        public DbSet<Slide> Slides { get; set; }
+
+
+
+
     }
 }

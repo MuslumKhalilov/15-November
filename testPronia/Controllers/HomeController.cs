@@ -12,12 +12,7 @@ namespace testPronia.Controllers
         {
             _context = context;   
         }
-        List<Slide> Slides = new()
-        {
-            new Slide() {Id=1,Title="Title1",SubTitle="Subtitle1",Description="Description1",SlideImageUrl="1-1-524x617.png"},
-
-            new Slide() {Id=1,Title="Title2",SubTitle="Subtitle2",Description="Description2",SlideImageUrl="1-2-524x617.png"} 
-        };
+      
        
         
         public IActionResult Index()
@@ -25,12 +20,8 @@ namespace testPronia.Controllers
             
             List<Product> Products = _context.Products.Take(8).OrderBy(p=>p.Id).ToList();
 
-            List<Slide> Slides = new()
-        {
-            new Slide() {Id=1,Title="Title1",SubTitle="Subtitle1",Description="Description1",SlideImageUrl="1-1-524x617.png"},
-
-            new Slide() {Id=1,Title="Title2",SubTitle="Subtitle2",Description="Description2",SlideImageUrl="1-2-524x617.png"}
-        };
+            List<Slide> Slides = _context.Slides.ToList();
+        
 
             VM vm = new() {slides=Slides, products=Products };
 
