@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
 using testPronia.Models;
 using testPronia.ModelViews;
@@ -18,7 +19,7 @@ namespace testPronia.Controllers
         public IActionResult Index()
         {
             
-            List<Product> Products = _context.Products.Take(8).OrderBy(p=>p.Id).ToList();
+            List<Product> Products = _context.Products.Include(p=> p.ProductImages).Take(8).OrderBy(p=>p.Id).ToList();
 
             List<Slide> Slides = _context.Slides.ToList();
         
