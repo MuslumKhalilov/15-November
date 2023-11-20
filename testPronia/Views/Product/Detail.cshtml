@@ -222,7 +222,7 @@
                                 @foreach (ProductTag productTag in Model.Product.ProductTags)
                                 {
                                     <li>
-                                        <a href="#">@productTag.Tag.Name</a>
+                                        <a href="#">@productTag.Tag.Name@(productTag != Model.Product.ProductTags[Model.Product.ProductTags.Count-1]?",":"")</a>
                                     </li>
                                 }
 
