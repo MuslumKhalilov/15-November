@@ -26,6 +26,7 @@ namespace testPronia.Controllers
                 .Include(p => p.Category)
                 .Include(p => p.ProductImages)
                 .Include(p => p.ProductTags).ThenInclude(pt => pt.Tag)
+                .Include(p => p.ProductColors).ThenInclude(pt => pt.Color)
                 .FirstOrDefault(p => p.Id == id);
             if (product == null) return NotFound();
             List<Product> ReleatedProducts=_context.Products.Include(p=> p.ProductImages).Where(p => p.CategoryId==product.CategoryId && p.Id != product.Id).ToList();

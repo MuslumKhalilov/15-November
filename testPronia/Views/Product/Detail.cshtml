@@ -121,10 +121,16 @@
                         <div class="selector-wrap color-option">
                             <span class="selector-title border-bottom-0">Color</span>
                             <select class="nice-select wide border-bottom-0 rounded-0">
-                                <option value="default">Black & White</option>
+
+                                @foreach (ProductColor productColor in Model.Product.ProductColors)
+                                {
+                                    <option value="default">@productColor.Color.Name</option>
+                                }
+
+                                @* <option value="default">Black & White</option>
                                 <option value="blue">Blue</option>
                                 <option value="green">Green</option>
-                                <option value="red">Red</option>
+                                <option value="red">Red</option> *@
                             </select>
                         </div>
                         <div class="selector-wrap size-option">
