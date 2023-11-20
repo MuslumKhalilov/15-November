@@ -1,5 +1,5 @@
 ﻿
-@model Product
+@model DetailVM
 <!-- Begin Main Content Area  -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
@@ -28,10 +28,10 @@
                         <div class="swiper-container single-product-slider">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <a href="~/assets/images/website-images/@Model.ProductImages.FirstOrDefault(pi=> pi.IsPrimary==true).Url"
+                                    <a href="~/assets/images/website-images/@Model.Product.ProductImages.FirstOrDefault(pi=> pi.IsPrimary==true).Url"
                                        class="single-img gallery-popup">
                                         <img class="img-full"
-                                             src="~/assets/images/website-images/@Model.ProductImages.FirstOrDefault(pi=> pi.IsPrimary==true).Url"
+                                             src="~/assets/images/website-images/@Model.Product.ProductImages.FirstOrDefault(pi=> pi.IsPrimary==true).Url"
                                              alt="Product Image" />
                                     </a>
                                 </div>
@@ -66,7 +66,7 @@
                                 <div class="swiper-wrapper">
                                     <a href="#" class="swiper-slide">
                                         <img class="img-full"
-                                             src="~/assets/images/website-images/@Model.ProductImages.FirstOrDefault(pi=> pi.IsPrimary==true).Url"
+                                             src="~/assets/images/website-images/@Model.Product.ProductImages.FirstOrDefault(pi=> pi.IsPrimary==true).Url"
                                              alt="Product Thumnail" />
                                     </a>
                                     <a href="#" class="swiper-slide">
@@ -100,9 +100,9 @@
                 </div>
                 <div class="col-lg-6 pt-5 pt-lg-0">
                     <div class="single-product-content">
-                        <h2 class="title">@Model.Name</h2>
+                        <h2 class="title">@Model.Product.Name</h2>
                         <div class="price-box">
-                            <span class="new-price">$@Model.Price</span>
+                            <span class="new-price">$@Model.Product.Price</span>
                         </div>
                         <div class="rating-box-wrap">
                             <div class="rating-box">
@@ -136,7 +136,7 @@
                             </select>
                         </div>
                         <p class="short-desc">
-                            @Model.Description
+                            @Model.Product.Description
                         </p>
                         <ul class="quantity-with-btn">
                             <li class="quantity">
@@ -203,7 +203,7 @@
                             <span class="title">SKU:</span>
                             <ul>
                                 <li>
-                                    <a href="#">@Model.SKU</a>
+                                    <a href="#">@Model.Product.SKU</a>
                                 </li>
                             </ul>
                         </div>
@@ -211,7 +211,7 @@
                             <span class="title">Categories :</span>
                             <ul>
                                 <li>
-                                    <a href="#">@Model.Category.Name</a>
+                                    <a href="#">@Model.Product.Category.Name</a>
                                 </li>
                                 
                             </ul>
@@ -503,7 +503,79 @@
                 <div class="col-lg-12">
                     <div class="swiper-container product-slider">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide product-item">
+
+                            @foreach (Product product in Model.Products)
+                            {
+                                <div class="swiper-slide product-item">
+                                    <div class="product-img">
+                                        <a href="single-product-variable.html">
+                                            <img class="primary-img"
+                                                 src="~/assets/images/website-images/@Model.Product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true).Url"
+                                                 alt="Product Images" />
+                                            <img class="secondary-img"
+                                                 src="~/assets/images/website-images/@Model.Product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true).Url"
+                                                 alt="Product Images" />
+                                        </a>
+                                        <div class="product-add-action">
+                                            <ul>
+                                                <li>
+                                                    <a href="wishlist.html"
+                                                       data-tippy="Add to wishlist"
+                                                       data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away"
+                                                       data-tippy-delay="50"
+                                                       data-tippy-arrow="true"
+                                                       data-tippy-theme="sharpborder">
+                                                        <i class="pe-7s-like"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="quuickview-btn"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#quickModal">
+                                                    <a href="#"
+                                                       data-tippy="Quickview"
+                                                       data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away"
+                                                       data-tippy-delay="50"
+                                                       data-tippy-arrow="true"
+                                                       data-tippy-theme="sharpborder">
+                                                        <i class="pe-7s-look"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="cart.html"
+                                                       data-tippy="Add to cart"
+                                                       data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away"
+                                                       data-tippy-delay="50"
+                                                       data-tippy-arrow="true"
+                                                       data-tippy-theme="sharpborder">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <a class="product-name"
+                                           href="single-product-variable.html">@Model.Product.Name</a>
+                                        <div class="price-box pb-1">
+                                            <span class="new-price">$@Model.Product.Price</span>
+                                        </div>
+                                        <div class="rating-box">
+                                            <ul>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            @* <div class="swiper-slide product-item">
                                 <div class="product-img">
                                     <a href="single-product-variable.html">
                                         <img class="primary-img"
@@ -770,7 +842,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> *@
                         </div>
                     </div>
                 </div>

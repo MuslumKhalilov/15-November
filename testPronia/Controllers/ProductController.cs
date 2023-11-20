@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
 using testPronia.Models;
+using testPronia.ModelViews;
 
 namespace testPronia.Controllers
 {
@@ -23,7 +24,9 @@ namespace testPronia.Controllers
             if (id <= 0) return BadRequest();
             Product product=_context.Products.Include(p => p.Category).Include(p => p.ProductImages).FirstOrDefault(p => p.Id == id);
             if (product == null) return NotFound();
-            return View(product);
+            List<Product> ReleatedProducts=_context.Products.Include(p=> p.ProductImages).Where(p => p.CategoryId==product.CategoryId && p.Id != product.Id).ToList();
+            DetailVM DetailVm = new() {Product=product,Products=ReleatedProducts };
+            return View(DetailVm);
         }
 
     }
