@@ -1,55 +1,58 @@
-﻿<div class="main-panel">
+﻿@model List<Category>
+@{
+	int count = 0;
+}
+<div class="main-panel">
 	<div class="content-wrapper">
 		<div class="row">
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Striped Table</h4>
-						<p class="card-description">
-							Add class <code>.table-striped</code>
-						</p>
+						<h4 class="card-title">Category Table</h4>
+						<a asp-controller="Category" asp-action="Create" class="btn btn-success">Create Category</a>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<thead>
 									<tr>
 										<th>
-											User
+											No
 										</th>
 										<th>
-											First name
+											Name
 										</th>
 										<th>
-											Progress
+											Product Count
 										</th>
 										<th>
-											Amount
+											Settings
 										</th>
-										<th>
-											Deadline
-										</th>
+										
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="py-1">
-											<img src="../../images/faces/face1.jpg" alt="image" />
-										</td>
+									@foreach (Category category in Model)
+									{
+										count++;
+										<tr>
 										<td>
-											Herman Beck
+											@count
 										</td>
+										
 										<td>
-											<div class="progress">
-												<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-											</div>
+												@category.Name
 										</td>
+										
 										<td>
-											$ 77.99
+											@category.Products.Count
 										</td>
+
 										<td>
-											May 15, 2015
+											<a class="btn btn-warning btn-info"><i class="mdi mdi-pencil"></i></a>
+											<a class="btn btn-danger btn-info"><i class="mdi mdi-delete"></i></a>
+											<a class="btn btn-success"><i class="mdi mdi-open-in-new"></i></a>
 										</td>
-									</tr>
-									<tr>
+									   </tr>							
+									}
 							</table>
 						</div>
 					</div>
