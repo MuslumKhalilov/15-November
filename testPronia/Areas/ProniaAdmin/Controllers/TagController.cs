@@ -71,5 +71,19 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 		}
 
+		async public Task<IActionResult> Delete(int id)
+		{
+			if (id <= 0) return BadRequest();
+			Tag existed = await _context.Tags.FirstOrDefaultAsync(t => t.Id == id);
+
+			_context.Tags.Remove(existed);
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+
+
+
+
+		}
+
 	}
 }
