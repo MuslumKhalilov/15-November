@@ -21,7 +21,7 @@ namespace testPronia.Controllers
             
             List<Product> Products = _context.Products.Include(p=> p.ProductImages).Take(8).OrderBy(p=>p.Id).ToList();
 
-            List<Slide> Slides = _context.Slides.ToList();
+            List<Slide> Slides = _context.Slides.Take(2).OrderBy(s => s.Order).ToList();
         
 
             VM vm = new() {slides=Slides, products=Products };
