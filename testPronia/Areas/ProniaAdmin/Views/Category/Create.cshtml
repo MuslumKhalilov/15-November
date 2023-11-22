@@ -1,4 +1,5 @@
-﻿<div class="main-panel">
+﻿@model Category
+<div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
 
@@ -7,11 +8,12 @@
                     <div class="card-body">
                         <h4 class="card-title">Create Category</h4>
                         
-                        <form class="forms-sample">
+                        <form class="forms-sample" method="post">
 
                             <div class="form-group">
-                                <label for="exampleInputName1">Name</label>
-                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                                <label  asp-for="Name">Name</label>
+                                <input asp-for="Name" class="form-control" placeholder="Name">
+                                <span class="text-danger" asp-validation-for="Name"></span>
                             </div>
                         
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
