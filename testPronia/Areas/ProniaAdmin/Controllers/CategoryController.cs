@@ -43,7 +43,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             await _context.Category.AddAsync(category);
             await _context.SaveChangesAsync();
             
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
             
         }
         public async Task<IActionResult> Update(int id)
@@ -68,7 +68,21 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             existed.Name = category.Name;
             
             _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        async public Task<IActionResult> Delete(int id)
+        {
+            if (id <=0) return BadRequest();
+            Category existed = await _context.Category.FirstOrDefaultAsync(c => c.Id==id);
+
+            _context.Category.Remove(existed);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            
+            
+
 
         }
     }
