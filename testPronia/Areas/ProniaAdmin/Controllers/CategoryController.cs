@@ -46,5 +46,30 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction("Index");
             
         }
+        public async Task<IActionResult> Update(int id)
+        {
+            if (id <= 0) return BadRequest();
+            Category category = await _context.Category.FirstOrDefaultAsync(c => c.Id == id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, Category category)
+        {
+            if (!ModelState.IsValid) {return View(); } 
+
+            Category existed= await _context.Category.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (existed==null) return NotFound();
+            
+            bool result = _context.Category.Any(c => c.Name==category.Name && c.Id==id);
+            if (result) { ModelState.AddModelError("Name","Category already exists"); return View();}
+
+            existed.Name = category.Name;
+            
+            _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+
+        }
     }
 }
