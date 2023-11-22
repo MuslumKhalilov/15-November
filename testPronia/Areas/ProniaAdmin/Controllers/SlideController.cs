@@ -18,5 +18,37 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             List<Slide> slides = _context.Slides.ToList();
 			return View(slides);
 		}
+		public IActionResult Create()
+		{
+			return View();
+		}
+		[HttpPost]
+		public async Task<IActionResult> Create(Slide slide)
+		{
+			if (slide.Photo == null)
+			{
+				ModelState.AddModelError("Photo","Photo required");
+				return View();
+				
+			}
+
+			if (slide.Photo.ContentType.Contains("image/"))
+			{
+				ModelState.AddModelError("Photo","Incorrect file type");
+			}
+
+			if(slide.Photo.Length> 2 * 1024 * 1024)
+			{
+				ModelState.AddModelError("Photo", "Photo size should not be larger than 2 mb");
+				
+			}
+			FileStream fileStream = new FileStream(@"C:\Users\Muslum\Desktop\Pronia\testPronia\wwwroot\assets\images\slider\" + slide.Photo.FileName, FileMode.Create);
+			await slide.Photo.CopyToAsync(fileStream);
+			slide.SlideImageUrl = slide.Photo.FileName;
+
+			await _context.AddAsync(slide);
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+		}
 	}
 }

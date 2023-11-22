@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fkv0P/1KG8g9LLUW/t87I/rW30mD8KUpnDPeAOCW9q0=",
+  "Hash": "EMMs7RqMBqhMB0B7m2SzoMb/LvUT73tMSiaMGJWP/XY=",
   "Source": "testPronia",
   "BasePath": "_content/testPronia",
   "Mode": "Default",
@@ -3313,6 +3313,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\slide-img\\2-3-960x741.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\slider\\Без названия.jpg",
+      "SourceId": "testPronia",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
+      "BasePath": "_content/testPronia",
+      "RelativePath": "assets/images/slider/Без названия.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\Без названия.jpg"
     },
     {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\testimonial\\bg\\1-1-1820x443.jpg",
