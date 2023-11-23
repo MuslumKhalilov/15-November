@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "n6isEOzC9eNdCXfbeuHOgzN+tcuFYWa+9BynkW9MDIg=",
+  "Hash": "ms1JhKmAGUzmzENbkJaxqoVvIH3xtRHW946NRhDO24o=",
   "Source": "testPronia",
   "BasePath": "_content/testPronia",
   "Mode": "Default",
@@ -3228,6 +3228,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\1-2-524x617.png"
+    },
+    {
+      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\slider\\4e3f61a18a7118974423498fd28eb799.jpg",
+      "SourceId": "testPronia",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
+      "BasePath": "_content/testPronia",
+      "RelativePath": "assets/images/slider/4e3f61a18a7118974423498fd28eb799.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\4e3f61a18a7118974423498fd28eb799.jpg"
     },
     {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\slider\\bg\\1-1.jpg",

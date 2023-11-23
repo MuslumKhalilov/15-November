@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using testPronia.DAL;
 using testPronia.Models;
 
@@ -26,6 +27,10 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(Slide slide)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View();
+			}
 			if (slide.Photo == null)
 			{
 				ModelState.AddModelError("Photo","Photo required");
@@ -42,6 +47,10 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			{
 				ModelState.AddModelError("Photo", "Photo size should not be larger than 2 mb");
 				
+			}
+			if (slide.Order <= 0)
+			{
+				ModelState.AddModelError("Order", "Order cannot be less than 0");
 			}
 			FileStream fileStream = new FileStream(@"C:\Users\Muslum\Desktop\Pronia\testPronia\wwwroot\assets\images\slider\" + slide.Photo.FileName, FileMode.Create);
 			await slide.Photo.CopyToAsync(fileStream);
