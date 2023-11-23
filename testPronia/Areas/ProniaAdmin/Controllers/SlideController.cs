@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
 using testPronia.Models;
 
@@ -49,6 +50,12 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			await _context.AddAsync(slide);
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
+		}
+
+		public async Task<IActionResult> Details(int id)
+		{
+			Slide slide= await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
+			return View(slide);
 		}
 	}
 }
