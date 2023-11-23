@@ -85,5 +85,12 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            Category category = await _context.Category.FirstOrDefaultAsync(c => c.Id==id);
+            List<Product> products = await _context.Products.Include(p=>p.ProductImages).Where(p=> p.CategoryId==id).ToListAsync();
+            return View(products);
+        }
     }
 }
