@@ -84,6 +84,15 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 
 		}
+        public async Task<IActionResult> Details(int id)
+        {
 
-	}
+			List<ProductTag> productTags = await _context.ProductTags.Include(pt => pt.Product.ProductImages).Where(t => t.TagId == id).ToListAsync();
+			
+            
+            return View(productTags);
+        }
+
+
+    }
 }
