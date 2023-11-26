@@ -10,11 +10,16 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 	public class SlideController : Controller
 	{
 		private readonly AppDbContext _context;
+		private readonly IWebHostEnvironment _env;
 
-		public SlideController(AppDbContext context)
+		
+
+		public SlideController(AppDbContext context, IWebHostEnvironment env)
         {
-			_context = context;   
+			_context = context;
+			_env = env;
         }
+		
         public IActionResult Index()
 		{
             List<Slide> slides = _context.Slides.ToList();
@@ -52,9 +57,15 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			{
 				ModelState.AddModelError("Order", "Order cannot be less than 0");
 			}
-			FileStream fileStream = new FileStream(@"C:\Users\Muslum\Desktop\Pronia\testPronia\wwwroot\assets\images\slider\" + slide.Photo.FileName, FileMode.Create);
+
+			string fileName= Guid.NewGuid().ToString()+ slide.Photo.FileName;
+			string path = Path.Combine(_env.WebRootPath, @"\assets\images\slider", fileName);
+			FileStream fileStream = new FileStream(path, FileMode.Create);
+
+			
 			await slide.Photo.CopyToAsync(fileStream);
-			slide.SlideImageUrl = slide.Photo.FileName;
+			fileStream.Close();
+			slide.SlideImageUrl = fileName;
 
 			await _context.AddAsync(slide);
 			await _context.SaveChangesAsync();
