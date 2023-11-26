@@ -1,0 +1,10 @@
+﻿@model Product
+<div class="card">
+    <img src="~/assets/images/slider/@Model.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true).Url" class="card-img-top" alt="@Model.Name">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Price</h5>
+        <p class="card-text">@Model.ProductColors</p>
+        <p class="card-text">@Model.Description</p>
+
+    </div>
+</div>

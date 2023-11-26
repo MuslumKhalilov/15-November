@@ -55,5 +55,13 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 			return View(nameof(Index));
 		}
+		public async Task<IActionResult> Details(int id)
+		{
+			Product product = await _context.Products.Include(p=>p.ProductColors.FirstOrDefault(pc=>pc.ProductId==id))
+                .Include(p=>p.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true)).FirstOrDefaultAsync(p=> p.Id==id);
+
+			return View();
+		}
+
 	}
 }

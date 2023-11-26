@@ -97,5 +97,47 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			return RedirectToAction(nameof(Index));
 
 		}
+		public async Task<IActionResult> Update(int id)
+		{
+			if (id <= 0) { return BadRequest(); }
+			Slide existed = await _context.Slides.FirstOrDefaultAsync(s=> s.Id==id);
+			if (existed == null) { return NotFound(); }
+
+			UpdateSlideVM slideVM = new UpdateSlideVM {
+			SlideImageUrl = existed.SlideImageUrl,
+			Title = existed.Title,
+			SubTitle= existed.SubTitle,
+			Description = existed.Description,
+			Order = existed.Order
+			
+			
+			};
+			return View(slideVM);
+
+		}
+		[HttpPost]
+		public async Task<IActionResult> Update(int id,CreateSlideVM slideVM)
+		{
+			if (!ModelState.IsValid) { return View(slideVM); }
+
+			Slide existed = await _context.Slides.FirstOrDefaultAsync(c => c.Id == id);
+
+			if (existed == null) return NotFound();
+
+			slideVM.SlideImageUrl = existed.SlideImageUrl;
+			slideVM.Title = existed.Title;
+			slideVM.SubTitle = existed.SubTitle;
+			slideVM.Description = existed.Description;
+			slideVM.Order = existed.Order;
+
+
+
+
+			_context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+
+
+		}
+
 	}
 }
