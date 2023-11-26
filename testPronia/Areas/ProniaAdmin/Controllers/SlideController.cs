@@ -61,14 +61,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 				ModelState.AddModelError("Order", "Order cannot be less than 0");
 			}
 
-			string fileName= Guid.NewGuid().ToString()+ slide.Photo.FileName;
-			string path = Path.Combine(_env.WebRootPath, @"\assets\images\slider", fileName);
-			FileStream fileStream = new FileStream(path, FileMode.Create);
-
-			
-			await slide.Photo.CopyToAsync(fileStream);
-			fileStream.Close();
-			slide.SlideImageUrl = fileName;
+		     slide.SlideImageUrl = await slide.Photo.CreateFile(_env.WebRootPath,"assets","images","slider");
 
 			await _context.AddAsync(slide);
 			await _context.SaveChangesAsync();
