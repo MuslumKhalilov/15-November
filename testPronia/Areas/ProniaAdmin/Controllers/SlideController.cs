@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using testPronia.DAL;
 using testPronia.Models;
+using testPronia.Utilities.Extensions;
 
 namespace testPronia.Areas.ProniaAdmin.Controllers
 {
@@ -43,9 +44,10 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 				
 			}
 
-			if (slide.Photo.ContentType.Contains("image/"))
+			if (slide.Photo.ValidateType("image/"))
 			{
 				ModelState.AddModelError("Photo","Incorrect file type");
+				return View();
 			}
 
 			if(slide.Photo.Length> 2 * 1024 * 1024)
