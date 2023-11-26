@@ -15,10 +15,10 @@ namespace testPronia.Models
         [Required]
         [MaxLength(25)]
         public string Description { get; set; }
-        public string SlideImageUrl { get; set; }
+        public string? SlideImageUrl { get; set; }
         [Required]
         public int Order { get; set; }
         [NotMapped]
-        public IFormFile Photo { get; set; }
+        public IFormFile? Photo { get; set; }
     }
 }
