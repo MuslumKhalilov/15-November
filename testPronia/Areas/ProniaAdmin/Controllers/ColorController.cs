@@ -89,7 +89,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         public async Task<IActionResult> Details(int id)
         {
 
-            List<ProductColor> productColors = await _context.ProductColors.Include(pt => pt.Product.ProductImages).Where(c => c.ColorId == id).ToListAsync();
+            List<ProductColor> productColors = await _context.ProductColors.Include(pc => pc.Product.ProductImages).Where(c => c.ColorId == id).ToListAsync();
 
 
             return View(productColors);
