@@ -1,0 +1,15 @@
+﻿@model List<ProductColor>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (ProductColor productColor in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="~/assets/images/website-images/@productColor.Product.ProductImages.FirstOrDefault(pi=>pi.IsPrimary==true)?.Url" class="card-img-top" alt="@productColor.Product.Name">
+                <div class="card-body">
+                    <h5 class="card-title">Name: @productColor.Product.Name</h5>
+                    <p class="card-text">Price: @productColor.Product.Price</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
