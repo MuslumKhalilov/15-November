@@ -44,15 +44,16 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 				
 			}
 
-			if (slide.Photo.ValidateType("image/"))
+			if (!slide.Photo.ValidateType("image/"))
 			{
 				ModelState.AddModelError("Photo","Incorrect file type");
 				return View();
 			}
 
-			if(slide.Photo.Length> 2 * 1024 * 1024)
+			if(!slide.Photo.ValidateSize(2*1024))
 			{
 				ModelState.AddModelError("Photo", "Photo size should not be larger than 2 mb");
+				return View();
 				
 			}
 			if (slide.Order <= 0)
