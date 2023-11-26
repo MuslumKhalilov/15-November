@@ -73,5 +73,19 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			Slide slide= await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
 			return View(slide);
 		}
+
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (id <= 0)
+			{
+				return BadRequest();
+			}
+			Slide slide = await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
+			slide.SlideImageUrl.DeleteFile(_env.WebRootPath, "assets", "images", "slider");
+			_context.Slides.Remove(slide);
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+
+		}
 	}
 }
