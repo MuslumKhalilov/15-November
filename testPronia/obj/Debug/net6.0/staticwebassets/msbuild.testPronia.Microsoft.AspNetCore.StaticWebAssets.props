@@ -3072,6 +3072,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\slider\bg\2-1.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\slider\e35e39e9-bd63-40e8-b8bf-d31e49e3d523Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>testPronia</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/testPronia</BasePath>
+      <RelativePath>assets/images/slider/e35e39e9-bd63-40e8-b8bf-d31e49e3d523Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\slider\e35e39e9-bd63-40e8-b8bf-d31e49e3d523Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\slider\inner-img\1-1-524x617.png))">
       <SourceType>Package</SourceType>
       <SourceId>testPronia</SourceId>

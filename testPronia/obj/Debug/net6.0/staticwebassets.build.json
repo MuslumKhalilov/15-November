@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ms1JhKmAGUzmzENbkJaxqoVvIH3xtRHW946NRhDO24o=",
+  "Hash": "LYdQ5cFVKYPFjyT2KEApV2RLfn7H8/4e+CbuhiOm0sE=",
   "Source": "testPronia",
   "BasePath": "_content/testPronia",
   "Mode": "Default",
@@ -3279,6 +3279,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\bg\\2-1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\slider\\e35e39e9-bd63-40e8-b8bf-d31e49e3d523Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg",
+      "SourceId": "testPronia",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
+      "BasePath": "_content/testPronia",
+      "RelativePath": "assets/images/slider/e35e39e9-bd63-40e8-b8bf-d31e49e3d523Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\slider\\e35e39e9-bd63-40e8-b8bf-d31e49e3d523Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg"
     },
     {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\slider\\inner-img\\1-1-524x617.png",

@@ -27,6 +27,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 		public async Task<IActionResult> Create()
 		{
 			ViewBag.Categories= await _context.Category.ToListAsync();
+            ViewBag.Tags= await _context.Tags.ToListAsync();
 
 			return View();
 		}
@@ -62,6 +63,52 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 			return View();
 		}
+        public async Task<IActionResult> Update(int id)
+        {
+            if (id <= 0) return BadRequest();
+            Product product = await _context.Products.FirstOrDefaultAsync(p=>p.Id==id);
+            if (product == null) return NotFound();
+            UpdateProductVM productVM = new UpdateProductVM
+            {
+                Name = product.Name,
+                Description = product.Description,
+                SKU = product.SKU,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                Categories= await _context.Category.ToListAsync()
+                
+            };
+
+            return View(productVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(int id,UpdateProductVM productVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                productVM.Categories= await _context.Category.ToListAsync();
+                return View(productVM);
+            }
+            Product existed = await _context.Products.FirstOrDefaultAsync(p=>p.Id==id);
+            if (existed == null)
+            {
+                return NotFound();
+            }
+            bool result = await _context.Category.AnyAsync(c=>c.Id==productVM.CategoryId);
+            if (!result)
+            {
+                productVM.Categories = await _context.Category.ToListAsync();
+                return View();
+            }
+            existed.Name=productVM.Name;
+            existed.Description=productVM.Description;
+            existed.SKU=productVM.SKU;
+            existed.Price=productVM.Price;
+            existed.CategoryId=productVM.CategoryId;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
 	}
 }
