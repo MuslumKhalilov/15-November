@@ -11,6 +11,7 @@ namespace testPronia.Areas.ViewModels
 		public string SKU { get; set; }
 		public int CategoryId { get; set; }
 		public List<int> TagIDs { get; set; }
+		public List<int> SizeIDs { get; set; }
 		
 	}
 }

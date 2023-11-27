@@ -40,6 +40,13 @@
                             <span class="text-danger" asp-validation-for="CategoryId"></span>
                             </Div>
 
+                            <Div class="form-group">
+                                <label asp-for="TagIDs">Tags</label>
+                                <select asp-for="TagIDs" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))" class="form-group">
+                                </select>
+                                <span class="text-danger" asp-validation-for="TagIDs"></span>
+                            </Div>
+
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
                             <button class="btn btn-light">Cancel</button>
                         </form>

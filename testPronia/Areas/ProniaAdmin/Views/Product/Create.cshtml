@@ -31,13 +31,32 @@
                                 <input asp-for="SKU" class="form-control" placeholder="SKU">
                                 <span class="text-danger" asp-validation-for="SKU"></span>
                             </div>
+
                             <Div class="form-group">
                                 <label asp-for="CategoryId">Category</label>
                             <select asp-for="CategoryId" asp-items="new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name))" class="form-group">
                                 <option selected disabled>Choose Category</option>
-
                             </select>
+
+                                
                             <span class="text-danger" asp-validation-for="CategoryId"></span>
+                            </Div>
+
+                            <Div class="form-group">
+                                
+                                <label asp-for="TagIDs">Tags</label>
+                                <select asp-for="TagIDs" asp-items="new SelectList(ViewBag.Tags,nameof(Tag.Id),nameof(Tag.Name))" class="form-group">
+                                    @* <option selected disabled>Choose Category</option> *@
+                                </select>
+                                <span class="text-danger" asp-validation-for="TagIDs"></span>
+                            </Div>
+                            <Div class="form-group">
+
+                                <label asp-for="SizeIDs">Tags</label>
+                                <select asp-for="SizeIDs" asp-items="new SelectList(ViewBag.Sizes,nameof(Size.Id),nameof(Size.Name))" class="form-group">
+                                    @* <option selected disabled>Choose Category</option> *@
+                                </select>
+                                <span class="text-danger" asp-validation-for="SizeIDs"></span>
                             </Div>
 
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
