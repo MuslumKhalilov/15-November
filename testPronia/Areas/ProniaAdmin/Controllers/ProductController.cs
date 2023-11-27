@@ -33,6 +33,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			ViewBag.Categories= await _context.Category.ToListAsync();
             ViewBag.Tags= await _context.Tags.ToListAsync();
             ViewBag.Sizes= await _context.Sizes.ToListAsync();
+            ViewBag.Colors = await _context.Colors.ToListAsync();
 
 			return View();
 		}
@@ -56,6 +57,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 					ViewBag.Categories = await _context.Category.ToListAsync();
 					ViewBag.Tags = await _context.Tags.ToListAsync();
 					ViewBag.Sizes = await _context.Sizes.ToListAsync();
+					ViewBag.Colors = await _context.Colors.ToListAsync();
 					ModelState.AddModelError("TagIds","Yanlis tag melumatlari gonderilib");
 					return View();
 				}
@@ -69,12 +71,26 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 					ViewBag.Categories = await _context.Category.ToListAsync();
 					ViewBag.Tags = await _context.Tags.ToListAsync();
 					ViewBag.Sizes = await _context.Sizes.ToListAsync();
+					ViewBag.Colors = await _context.Colors.ToListAsync();
 					ModelState.AddModelError("SizeIds", "Yanlis size melumatlari gonderilib");
 					return View();
 				}
             }
+			foreach (int id in createProductVM.ColorIDs)
+			{
+				bool colorResult = await _context.Colors.AnyAsync(c => c.Id == id);
+				if (!colorResult)
+				{
+					ViewBag.Categories = await _context.Category.ToListAsync();
+					ViewBag.Tags = await _context.Tags.ToListAsync();
+					ViewBag.Sizes = await _context.Sizes.ToListAsync();
+					ViewBag.Colors = await _context.Colors.ToListAsync();
+					ModelState.AddModelError("SizeIds", "Yanlis color melumatlari gonderilib");
+					return View();
+				}
+			}
 
-            Product product = new Product
+			Product product = new Product
             {
                 Name = createProductVM.Name,
                 CategoryId = createProductVM.CategoryId,
@@ -82,7 +98,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 Description = createProductVM.Description,
                 SKU = createProductVM.SKU,
                 ProductTags = new List<ProductTag>(),
-                ProductSizes= new List<ProductSize>()
+                ProductSizes= new List<ProductSize>(),
+                ProductColors= new List<ProductColor>()
 
 			};
 
@@ -106,9 +123,19 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 };
                 product .ProductTags.Add(productTag);
             }
+			foreach (int colorID in createProductVM.ColorIDs)
+			{
+				ProductColor productColor = new ProductColor
+				{
+					ColorId = colorID
 
-           
-            _context.Products.Add(product);
+
+				};
+				product.ProductColors.Add(productColor);
+			}
+
+
+			_context.Products.Add(product);
             await _context.SaveChangesAsync();
 
 			return RedirectToAction(nameof(Index));
@@ -123,7 +150,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         public async Task<IActionResult> Update(int id)
         {
             if (id <= 0) return BadRequest();
-            Product product = await _context.Products.Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
+            Product product = await _context.Products.Include(p=>p.ProductSizes).Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
             if (product == null) return NotFound();
             UpdateProductVM productVM = new UpdateProductVM
             {
@@ -134,7 +161,9 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 CategoryId = product.CategoryId,
                 Categories= await _context.Category.ToListAsync(),
                 Tags = await _context.Tags.ToListAsync(),
-                TagIDs= product.ProductTags.Select(pt=>pt.TagId).ToList()
+                TagIDs= product.ProductTags.Select(pt=>pt.TagId).ToList(),
+                Sizes = await _context.Sizes.ToListAsync(),
+                SizeIDs= product.ProductSizes.Select(ps=>ps.SizeId).ToList()
                 
             };
 
