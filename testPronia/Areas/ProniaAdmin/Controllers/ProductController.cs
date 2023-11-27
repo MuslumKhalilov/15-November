@@ -55,10 +55,25 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 {
 					ViewBag.Categories = await _context.Category.ToListAsync();
 					ViewBag.Tags = await _context.Tags.ToListAsync();
-                    ModelState.AddModelError("TagIds","Yanlis tag melumatlari gonderilib");
+					ViewBag.Sizes = await _context.Sizes.ToListAsync();
+					ModelState.AddModelError("TagIds","Yanlis tag melumatlari gonderilib");
 					return View();
 				}
             }
+
+            foreach (int id in createProductVM.SizeIDs)
+            {
+                bool sizeResult = await _context.Sizes.AnyAsync(s=>s.Id==id);
+                if (!sizeResult)
+                {
+					ViewBag.Categories = await _context.Category.ToListAsync();
+					ViewBag.Tags = await _context.Tags.ToListAsync();
+					ViewBag.Sizes = await _context.Sizes.ToListAsync();
+					ModelState.AddModelError("SizeIds", "Yanlis size melumatlari gonderilib");
+					return View();
+				}
+            }
+
             Product product = new Product
             {
                 Name = createProductVM.Name,
@@ -66,9 +81,19 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 Price = createProductVM.Price,
                 Description = createProductVM.Description,
                 SKU = createProductVM.SKU,
-                ProductTags = new List<ProductTag>()
+                ProductTags = new List<ProductTag>(),
+                ProductSizes= new List<ProductSize>()
 
 			};
+
+            foreach (int id in createProductVM.SizeIDs)
+            {
+                ProductSize productSize = new ProductSize
+                {
+                    SizeId = id
+                };
+                product.ProductSizes.Add(productSize);
+            }
 
 			
             foreach (int tagID in createProductVM.TagIDs)
