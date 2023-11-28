@@ -176,9 +176,10 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             {
                 productVM.Categories= await _context.Category.ToListAsync();
                 productVM.Tags= await _context.Tags.ToListAsync();
-                return View(productVM);
+				productVM.Sizes= await _context.Sizes.ToListAsync();
+				return View(productVM);
             }
-            Product existed = await _context.Products.Include(p=> p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
+            Product existed = await _context.Products.Include(p=>p.ProductSizes).Include(p=> p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
             if (existed == null)
             {
                 return NotFound();
@@ -188,6 +189,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             {
                 productVM.Categories = await _context.Category.ToListAsync();
 				productVM.Tags = await _context.Tags.ToListAsync();
+				productVM.Sizes = await _context.Sizes.ToListAsync();
 				return View();
             }
            
@@ -208,7 +210,24 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 }
             }
 
-            existed.Name=productVM.Name;
+			foreach (ProductSize productSize in existed.ProductSizes)
+			{
+				if (!productVM.SizeIDs.Exists(sID => sID == productSize.SizeId))
+				{
+					_context.ProductSizes.Remove(productSize);
+				}
+			}
+			List<int> NewSizeIDs = new List<int>();
+			foreach (int SizeId in productVM.SizeIDs)
+			{
+				if (!existed.ProductSizes.Any(pt => pt.SizeId == SizeId))
+				{
+
+					existed.ProductSizes.Add(new ProductSize { SizeId=SizeId });
+				}
+			}
+
+			existed.Name=productVM.Name;
             existed.Description=productVM.Description;
             existed.SKU=productVM.SKU;
             existed.Price=productVM.Price;
