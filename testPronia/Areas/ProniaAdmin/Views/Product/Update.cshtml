@@ -54,6 +54,13 @@
                                 <span class="text-danger" asp-validation-for="SizeIDs"></span>
                             </Div>
 
+                            <Div class="form-group">
+                                <label asp-for="ColorIDs">Colors</label>
+                                <select asp-for="ColorIDs" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))" class="form-group">
+                                </select>
+                                <span class="text-danger" asp-validation-for="ColorIDs"></span>
+                            </Div>
+
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
                             <button class="btn btn-light">Cancel</button>
                         </form>

@@ -150,7 +150,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         public async Task<IActionResult> Update(int id)
         {
             if (id <= 0) return BadRequest();
-            Product product = await _context.Products.Include(p=>p.ProductSizes).Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
+            Product product = await _context.Products.Include(p=>p.ProductColors).Include(p=>p.ProductSizes).Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
             if (product == null) return NotFound();
             UpdateProductVM productVM = new UpdateProductVM
             {
@@ -163,7 +163,10 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 Tags = await _context.Tags.ToListAsync(),
                 TagIDs= product.ProductTags.Select(pt=>pt.TagId).ToList(),
                 Sizes = await _context.Sizes.ToListAsync(),
-                SizeIDs= product.ProductSizes.Select(ps=>ps.SizeId).ToList()
+                SizeIDs= product.ProductSizes.Select(ps=>ps.SizeId).ToList(),
+                Colors= await _context.Colors.ToListAsync(),
+                ColorIDs= product.ProductColors.Select(ps=>ps.ColorId).ToList()
+                
                 
             };
 
@@ -177,9 +180,10 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 productVM.Categories= await _context.Category.ToListAsync();
                 productVM.Tags= await _context.Tags.ToListAsync();
 				productVM.Sizes= await _context.Sizes.ToListAsync();
+                productVM.Colors= await _context.Colors.ToListAsync();
 				return View(productVM);
             }
-            Product existed = await _context.Products.Include(p=>p.ProductSizes).Include(p=> p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
+            Product existed = await _context.Products.Include(p=>p.ProductColors).Include(p=>p.ProductSizes).Include(p=> p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
             if (existed == null)
             {
                 return NotFound();
@@ -190,6 +194,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 productVM.Categories = await _context.Category.ToListAsync();
 				productVM.Tags = await _context.Tags.ToListAsync();
 				productVM.Sizes = await _context.Sizes.ToListAsync();
+                productVM.Colors = await _context.Colors.ToListAsync();
 				return View();
             }
            
@@ -224,6 +229,23 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 				{
 
 					existed.ProductSizes.Add(new ProductSize { SizeId=SizeId });
+				}
+			}
+
+			foreach (ProductColor productColor in existed.ProductColors)
+			{
+				if (!productVM.ColorIDs.Exists(cID => cID == productColor.ColorId))
+				{
+					_context.ProductColors.Remove(productColor);
+				}
+			}
+			List<int> NewColorIDs = new List<int>();
+			foreach (int ColorId in productVM.ColorIDs)
+			{
+				if (!existed.ProductColors.Any(pt => pt.ColorId == ColorId))
+				{
+
+					existed.ProductColors.Add(new ProductColor { ColorId = ColorId });
 				}
 			}
 
