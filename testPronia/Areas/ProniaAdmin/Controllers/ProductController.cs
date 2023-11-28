@@ -190,16 +190,18 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 				};
 				product.ProductColors.Add(productColor);
 			}
-
+            TempData["Message"] = "";
             foreach (IFormFile photo in createProductVM.Photos)
             {
 				if (!photo.ValidateType("image/"))
 				{
+                    TempData["Message"] += $"<p class=\"text-danger\">{photo.FileName} file tipi uyqun deyil</p>";
                     continue;
 				}
 				if (!photo.ValidateSize(600))
 				{
-                    continue;
+					TempData["Message"] += $"<p class=\"text-danger\">{photo.FileName} file olcusu uyqun deyil</p>";
+					continue;
 				}
                 product.ProductImages.Add(new ProductImage { IsPrimary=null,Url= await photo.CreateFile(_env.WebRootPath,"assets", "images", "website-images"),Alternative=createProductVM.Name});
 			}
