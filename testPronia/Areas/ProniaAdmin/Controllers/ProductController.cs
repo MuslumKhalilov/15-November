@@ -261,5 +261,15 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id <= 0) return BadRequest();
+            Product existed = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            _context.Products.Remove(existed);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            
+        }
+
 	}
 }
