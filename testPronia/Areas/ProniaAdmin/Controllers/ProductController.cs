@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using testPronia.Areas.ViewModels;
 using testPronia.DAL;
 using testPronia.Models;
+using testPronia.Utilities.Extensions;
 
 namespace testPronia.Areas.ProniaAdmin.Controllers
 {
@@ -10,10 +11,12 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;
+		private readonly IWebHostEnvironment _env;
 
-        public ProductController(AppDbContext context)
+		public ProductController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env= env;  
         }
 
         public async Task<IActionResult> Index()
@@ -49,7 +52,60 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             {
                 ModelState.AddModelError("CategoryId","Category doesn't exists");
             }
-            foreach (int TagId in createProductVM.TagIDs)
+
+            if (!createProductVM.MainPhoto.ValidateType("image/"))
+            {
+				ViewBag.Categories = await _context.Category.ToListAsync();
+				ViewBag.Tags = await _context.Tags.ToListAsync();
+				ViewBag.Sizes = await _context.Sizes.ToListAsync();
+				ViewBag.Colors = await _context.Colors.ToListAsync();
+				ModelState.AddModelError("MainPhoto", "File tipi uyqun deyil");
+				return View();
+			}
+            if (!createProductVM.MainPhoto.ValidateSize(600))
+            {
+				ViewBag.Categories = await _context.Category.ToListAsync();
+				ViewBag.Tags = await _context.Tags.ToListAsync();
+				ViewBag.Sizes = await _context.Sizes.ToListAsync();
+				ViewBag.Colors = await _context.Colors.ToListAsync();
+				ModelState.AddModelError("MainPhoto", "File olcusu uyqun deyil");
+				return View();
+			}
+
+
+			if (!createProductVM.HoverPhoto.ValidateType("image/"))
+			{
+				ViewBag.Categories = await _context.Category.ToListAsync();
+				ViewBag.Tags = await _context.Tags.ToListAsync();
+				ViewBag.Sizes = await _context.Sizes.ToListAsync();
+				ViewBag.Colors = await _context.Colors.ToListAsync();
+				ModelState.AddModelError("HoverPhoto", "File tipi uyqun deyil");
+				return View();
+			}
+			if (!createProductVM.HoverPhoto.ValidateSize(600))
+			{
+				ViewBag.Categories = await _context.Category.ToListAsync();
+				ViewBag.Tags = await _context.Tags.ToListAsync();
+				ViewBag.Sizes = await _context.Sizes.ToListAsync();
+				ViewBag.Colors = await _context.Colors.ToListAsync();
+				ModelState.AddModelError("HoverPhoto", "File olcusu uyqun deyil");
+				return View();
+			}
+
+            ProductImage mainImage = new ProductImage
+            {
+                Alternative= createProductVM.Name,
+                IsPrimary = true,
+                Url = await createProductVM.MainPhoto.CreateFile(_env.WebRootPath, "assets", "images", "website-images")
+            };
+			ProductImage hoverImage = new ProductImage
+			{
+				Alternative = createProductVM.Name,
+				IsPrimary = true,
+				Url = await createProductVM.HoverPhoto.CreateFile(_env.WebRootPath, "assets", "images", "website-images")
+			};
+
+			foreach (int TagId in createProductVM.TagIDs)
             {
                bool tagResult= await _context.Tags.AnyAsync(t=> t.Id==TagId);
                 if (!tagResult)
@@ -99,7 +155,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 SKU = createProductVM.SKU,
                 ProductTags = new List<ProductTag>(),
                 ProductSizes= new List<ProductSize>(),
-                ProductColors= new List<ProductColor>()
+                ProductColors= new List<ProductColor>(),
+                ProductImages= new List<ProductImage> { mainImage,hoverImage}
 
 			};
 
@@ -132,6 +189,19 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 				};
 				product.ProductColors.Add(productColor);
+			}
+
+            foreach (IFormFile photo in createProductVM.Photos)
+            {
+				if (!photo.ValidateType("image/"))
+				{
+                    continue;
+				}
+				if (!photo.ValidateSize(600))
+				{
+                    continue;
+				}
+                product.ProductImages.Add(new ProductImage { IsPrimary=null,Url= await photo.CreateFile(_env.WebRootPath,"assets", "images", "website-images"),Alternative=createProductVM.Name});
 			}
 
 
@@ -197,7 +267,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 productVM.Colors = await _context.Colors.ToListAsync();
 				return View();
             }
-           
+
+           /* existed.ProductTags.RemoveAll(pt=> !productVM.TagIDs.Exists(tID=> tID==pt.TagId));*/ 
             foreach (ProductTag productTag in existed.ProductTags)
             {
                 if (!productVM.TagIDs.Exists(tID=>tID==productTag.TagId))
@@ -205,6 +276,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                     _context.ProductTags.Remove(productTag);
                 }
             }
+
+
             List<int> NewTagIDs= new List<int>();
             foreach (int TagId in productVM.TagIDs)
             {

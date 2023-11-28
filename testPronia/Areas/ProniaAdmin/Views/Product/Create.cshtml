@@ -10,6 +10,21 @@
                         <h4 class="card-title">Create Product</h4>
 
                         <form class="forms-sample" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label asp-for="MainPhoto">Main Image</label>
+                                <input asp-for="MainPhoto" class="form-control" placeholder="Name" accept="image/*">
+                                <span class="text-danger" asp-validation-for="MainPhoto"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="HoverPhoto">Hover Image</label>
+                                <input asp-for="HoverPhoto" class="form-control" placeholder="Name" accept="image/*">
+                                <span class="text-danger" asp-validation-for="HoverPhoto"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Photos">Additional Images</label>
+                                <input asp-for="Photos" class="form-control" placeholder="Name" accept="image/*">
+                                <span class="text-danger" asp-validation-for="Photos"></span>
+                            </div>
 
                             <div class="form-group">
                                 <label asp-for="Name">Name</label>
@@ -52,7 +67,7 @@
                             </Div>
                             <Div class="form-group">
 
-                                <label asp-for="SizeIDs">Tags</label>
+                                <label asp-for="SizeIDs">Sizes</label>
                                 <select asp-for="SizeIDs" asp-items="new SelectList(ViewBag.Sizes,nameof(Size.Id),nameof(Size.Name))" class="form-group">
                                     @* <option selected disabled>Choose Category</option> *@
                                 </select>
@@ -61,7 +76,7 @@
 
                             <Div class="form-group">
 
-                                <label asp-for="ColorIDs">Tags</label>
+                                <label asp-for="ColorIDs">Sizes</label>
                                 <select asp-for="ColorIDs" asp-items="new SelectList(ViewBag.Colors,nameof(Color.Id),nameof(Color.Name))" class="form-group">
                                     @* <option selected disabled>Choose Category</option> *@
                                 </select>
