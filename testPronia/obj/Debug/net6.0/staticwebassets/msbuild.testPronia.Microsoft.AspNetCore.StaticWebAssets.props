@@ -3264,22 +3264,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\testimonial\user\3.png))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>testPronia</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/testPronia</BasePath>
-      <RelativePath>assets/images/website-images/05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\1--1rnu4p.png))">
       <SourceType>Package</SourceType>
       <SourceId>testPronia</SourceId>
@@ -4128,12 +4112,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\91c9de8e-ffd9-462c-ae6d-12310f5c1e0eBachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\b8009e45-4fc8-46f8-9c05-79bc55fc1e764e3f61a18a7118974423498fd28eb799.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>testPronia</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/testPronia</BasePath>
-      <RelativePath>assets/images/website-images/a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg</RelativePath>
+      <RelativePath>assets/images/website-images/b8009e45-4fc8-46f8-9c05-79bc55fc1e764e3f61a18a7118974423498fd28eb799.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -4142,7 +4126,39 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\b8009e45-4fc8-46f8-9c05-79bc55fc1e764e3f61a18a7118974423498fd28eb799.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\bd72ee20-1004-4677-baad-c5bd17a057b4Без названия.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>testPronia</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/testPronia</BasePath>
+      <RelativePath>assets/images/website-images/bd72ee20-1004-4677-baad-c5bd17a057b4Без названия.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\bd72ee20-1004-4677-baad-c5bd17a057b4Без названия.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\c3467874-fb14-4381-a608-4007168602f4baeace30f8bed42a8660f163eac67031.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>testPronia</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/testPronia</BasePath>
+      <RelativePath>assets/images/website-images/c3467874-fb14-4381-a608-4007168602f4baeace30f8bed42a8660f163eac67031.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\c3467874-fb14-4381-a608-4007168602f4baeace30f8bed42a8660f163eac67031.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\assets\images\website-images\car.png))">
       <SourceType>Package</SourceType>

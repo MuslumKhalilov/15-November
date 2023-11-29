@@ -396,6 +396,32 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 				});
 
 			}
+			if (productVM.ProductImages == null)
+			{
+				productVM.ProductImages = new List<ProductImage>();
+			}
+			List<ProductImage> removable = existed.ProductImages.Where(pi => !productVM.ImageIDs.Exists(ImgId=>ImgId==pi.Id)&& pi.IsPrimary==null).ToList();
+			foreach (ProductImage image in removable)
+			{
+				image.Url.DeleteFile(_env.WebRootPath, "assets", "images", "website-images");
+				existed?.ProductImages.Remove(image);
+			}
+
+			TempData["Message"] = "";
+			foreach (IFormFile photo in productVM.Photos)
+			{
+				if (!photo.ValidateType("image/"))
+				{
+					TempData["Message"] += $"<p class=\"text-danger\">{photo.FileName} file tipi uyqun deyil</p>";
+					continue;
+				}
+				if (!photo.ValidateSize(600))
+				{
+					TempData["Message"] += $"<p class=\"text-danger\">{photo.FileName} file olcusu uyqun deyil</p>";
+					continue;
+				}
+				existed.ProductImages.Add(new ProductImage { IsPrimary = null, Url = await photo.CreateFile(_env.WebRootPath, "assets", "images", "website-images"), Alternative = productVM.Name });
+			}
 
 			existed.Name=productVM.Name;
             existed.Description=productVM.Description;
@@ -412,7 +438,14 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0) return BadRequest();
-            Product existed = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            Product existed = await _context.Products.Include(p=>p.ProductImages).FirstOrDefaultAsync(p => p.Id == id);
+			if (existed == null) return NotFound();
+
+			foreach (ProductImage image in existed.ProductImages)
+			{
+				image.Url.DeleteFile(_env.WebRootPath, "assets", "images", "website-images");
+			}
+
             _context.Products.Remove(existed);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

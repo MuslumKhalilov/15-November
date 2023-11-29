@@ -38,10 +38,11 @@
 							<div class="form-group d-flex">
 								@foreach (ProductImage image in Model.ProductImages.Where(pi => pi.IsPrimary == null))
 								{
-									<div>
+									<div class="position-relative">
 
 										<img style="width:150px; height:150px;" src="~/assets/images/website-images/@image.Url" />
-
+										<button type="button" style="right:5px;top:5px;" class="cus-delete btn btn-danger position-absolute">X</button>
+										<input asp-for="ImageIDs" type="hidden" value="@image.Id">
 
 									</div>
 								}
@@ -111,3 +112,14 @@
 		</div>
 	</div>
 </div>
+
+								<script>
+									var btns = document.getElementsByClassName("cus-delete")
+									for (let i = 0; i <= btns.length; i++) {
+
+										btns[i].addEventListener("click", function () {
+
+											btns[i].parentElement.remove()
+										})
+									}
+								</script>

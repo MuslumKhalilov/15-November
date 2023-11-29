@@ -14,6 +14,7 @@ namespace testPronia.Areas.ViewModels
         public List<int> TagIDs { get; set; }
         public List<Tag>? Tags { get; set; }
         public List<int> SizeIDs { get; set; }
+        public List<int>? ImageIDs { get; set; }
         public List<Size>? Sizes { get; set; }
         public List<int> ColorIDs { get; set; }
         public List<Color>? Colors { get; set; }
