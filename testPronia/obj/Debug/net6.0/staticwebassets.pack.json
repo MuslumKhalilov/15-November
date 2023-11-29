@@ -817,6 +817,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\testimonial\\user\\3.png"
     },
     {
+      "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg"
+    },
+    {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\1--1rnu4p.png",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\1--1rnu4p.png"
     },
@@ -1009,10 +1013,6 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\3.png"
     },
     {
-      "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\340af4f3-1ca7-493a-9fb8-03d1a1e459a4baeace30f8bed42a8660f163eac67031.jpg",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\340af4f3-1ca7-493a-9fb8-03d1a1e459a4baeace30f8bed42a8660f163eac67031.jpg"
-    },
-    {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\465e7fe8-4d20-4329-8aab-3618d784cc40Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\465e7fe8-4d20-4329-8aab-3618d784cc40Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg"
     },
@@ -1025,16 +1025,16 @@
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\632524c1-8dd7-40c6-8f48-cc16894869eeBachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg"
     },
     {
-      "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\8bbc9d99-a173-4a09-96e1-c7f4baf17864Без названия.jpg",
-      "PackagePath": "staticwebassets\\assets\\images\\website-images\\8bbc9d99-a173-4a09-96e1-c7f4baf17864Без названия.jpg"
-    },
-    {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\8e04ab3e-e967-4369-8b6b-668a57c4d5eb4e3f61a18a7118974423498fd28eb799.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\8e04ab3e-e967-4369-8b6b-668a57c4d5eb4e3f61a18a7118974423498fd28eb799.jpg"
     },
     {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\91c9de8e-ffd9-462c-ae6d-12310f5c1e0eBachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\91c9de8e-ffd9-462c-ae6d-12310f5c1e0eBachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg"
     },
     {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\car.png",
@@ -1055,6 +1055,10 @@
     {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\f0f6365a-e0a3-457f-9ab1-44c8ed24cd714e3f61a18a7118974423498fd28eb799.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\website-images\\f0f6365a-e0a3-457f-9ab1-44c8ed24cd714e3f61a18a7118974423498fd28eb799.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\f244edca-6a80-4e21-8037-92ce055ab8cbБез названия.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\website-images\\f244edca-6a80-4e21-8037-92ce055ab8cbБез названия.jpg"
     },
     {
       "Id": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\quotation.png",

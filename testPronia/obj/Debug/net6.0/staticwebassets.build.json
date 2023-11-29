@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TTyYFA9eMoNI98iAATzKd9EiIs7O5bv2SKhvBfYt9o8=",
+  "Hash": "/wNfbTj/UKCz4tSqmcLnCpjOsMF6nr7cDAjbWyJg2P4=",
   "Source": "testPronia",
   "BasePath": "_content/testPronia",
   "Mode": "Default",
@@ -3485,6 +3485,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\testimonial\\user\\3.png"
     },
     {
+      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg",
+      "SourceId": "testPronia",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
+      "BasePath": "_content/testPronia",
+      "RelativePath": "assets/images/website-images/05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\05f00618-96f7-4a2a-bc13-eab4a7a78a0bbaeace30f8bed42a8660f163eac67031.jpg"
+    },
+    {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\1.png",
       "SourceId": "testPronia",
       "SourceType": "Discovered",
@@ -4301,23 +4318,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\3.png"
     },
     {
-      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\340af4f3-1ca7-493a-9fb8-03d1a1e459a4baeace30f8bed42a8660f163eac67031.jpg",
-      "SourceId": "testPronia",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
-      "BasePath": "_content/testPronia",
-      "RelativePath": "assets/images/website-images/340af4f3-1ca7-493a-9fb8-03d1a1e459a4baeace30f8bed42a8660f163eac67031.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\340af4f3-1ca7-493a-9fb8-03d1a1e459a4baeace30f8bed42a8660f163eac67031.jpg"
-    },
-    {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\465e7fe8-4d20-4329-8aab-3618d784cc40Bachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg",
       "SourceId": "testPronia",
       "SourceType": "Discovered",
@@ -4369,23 +4369,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\632524c1-8dd7-40c6-8f48-cc16894869eeBachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg"
     },
     {
-      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\8bbc9d99-a173-4a09-96e1-c7f4baf17864Без названия.jpg",
-      "SourceId": "testPronia",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
-      "BasePath": "_content/testPronia",
-      "RelativePath": "assets/images/website-images/8bbc9d99-a173-4a09-96e1-c7f4baf17864Без названия.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\8bbc9d99-a173-4a09-96e1-c7f4baf17864Без названия.jpg"
-    },
-    {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\8e04ab3e-e967-4369-8b6b-668a57c4d5eb4e3f61a18a7118974423498fd28eb799.jpg",
       "SourceId": "testPronia",
       "SourceType": "Discovered",
@@ -4418,6 +4401,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\91c9de8e-ffd9-462c-ae6d-12310f5c1e0eBachelor's_button,_Basket_flower,_Boutonniere_flower,_Cornflower_-_3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg",
+      "SourceId": "testPronia",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
+      "BasePath": "_content/testPronia",
+      "RelativePath": "assets/images/website-images/a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\a4598b74-ccde-4245-977a-38c97c710ebc4e3f61a18a7118974423498fd28eb799.jpg"
     },
     {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\car.png",
@@ -4503,6 +4503,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\f0f6365a-e0a3-457f-9ab1-44c8ed24cd714e3f61a18a7118974423498fd28eb799.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\f244edca-6a80-4e21-8037-92ce055ab8cbБез названия.jpg",
+      "SourceId": "testPronia",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\",
+      "BasePath": "_content/testPronia",
+      "RelativePath": "assets/images/website-images/f244edca-6a80-4e21-8037-92ce055ab8cbБез названия.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\f244edca-6a80-4e21-8037-92ce055ab8cbБез названия.jpg"
     },
     {
       "Identity": "C:\\Users\\Muslum\\Desktop\\Pronia\\testPronia\\wwwroot\\assets\\images\\website-images\\quotation.png",
