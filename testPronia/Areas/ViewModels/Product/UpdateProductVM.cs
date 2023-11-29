@@ -17,5 +17,9 @@ namespace testPronia.Areas.ViewModels
         public List<Size>? Sizes { get; set; }
         public List<int> ColorIDs { get; set; }
         public List<Color>? Colors { get; set; }
-    }
+        public List<ProductImage> ProductImages { get; set; }
+		public IFormFile? MainPhoto { get; set; }
+		public IFormFile? HoverPhoto { get; set; }
+		public List<IFormFile>? Photos { get; set; }
+	}
 }

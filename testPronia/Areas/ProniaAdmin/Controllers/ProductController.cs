@@ -101,7 +101,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			ProductImage hoverImage = new ProductImage
 			{
 				Alternative = createProductVM.Name,
-				IsPrimary = true,
+				IsPrimary = false,
 				Url = await createProductVM.HoverPhoto.CreateFile(_env.WebRootPath, "assets", "images", "website-images")
 			};
 
@@ -222,7 +222,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         public async Task<IActionResult> Update(int id)
         {
             if (id <= 0) return BadRequest();
-            Product product = await _context.Products.Include(p=>p.ProductColors).Include(p=>p.ProductSizes).Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
+            Product product = await _context.Products.Include(p=>p.ProductImages).Include(p=>p.ProductColors).Include(p=>p.ProductSizes).Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
             if (product == null) return NotFound();
             UpdateProductVM productVM = new UpdateProductVM
             {
@@ -237,7 +237,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
                 Sizes = await _context.Sizes.ToListAsync(),
                 SizeIDs= product.ProductSizes.Select(ps=>ps.SizeId).ToList(),
                 Colors= await _context.Colors.ToListAsync(),
-                ColorIDs= product.ProductColors.Select(ps=>ps.ColorId).ToList()
+                ColorIDs= product.ProductColors.Select(ps=>ps.ColorId).ToList(),
+                ProductImages=product.ProductImages
                 
                 
             };

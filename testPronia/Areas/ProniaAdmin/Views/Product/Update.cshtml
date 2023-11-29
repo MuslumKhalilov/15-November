@@ -1,73 +1,113 @@
-﻿
+﻿@{
+	ProductImage main = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == true);
+	ProductImage hover = Model.ProductImages.FirstOrDefault(pi => pi.IsPrimary == false);
+}
 @model UpdateProductVM
 <div class="main-panel">
-    <div class="content-wrapper">
-        <div class="row">
+	<div class="content-wrapper">
+		<div class="row">
 
-            <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Update Product</h4>
+			<div class="col-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Update Product</h4>
 
-                        <form class="forms-sample" method="post" enctype="multipart/form-data">
+						<form class="forms-sample" method="post" enctype="multipart/form-data">
+							<div class="form-group">
 
-                            <div class="form-group">
-                                <label asp-for="Name">Name</label>
-                                <input asp-for="Name" class="form-control" placeholder="Name">
-                                <span class="text-danger" asp-validation-for="Name"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Price">Price</label>
-                                <input asp-for="Price" class="form-control" placeholder="Price">
-                                <span class="text-danger" asp-validation-for="Price"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Description">Description</label>
-                                <input asp-for="Description" class="form-control" placeholder="Description">
-                                <span class="text-danger" asp-validation-for="Description"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="SKU">SKU</label>
-                                <input asp-for="SKU" class="form-control" placeholder="SKU">
-                                <span class="text-danger" asp-validation-for="SKU"></span>
-                            </div>
-                            <Div class="form-group">
-                                <label asp-for="CategoryId">Category</label>
-                            <select asp-for="CategoryId" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))" class="form-group">
-                                
+								<img style="width:150px; height:150px;" src="~/assets/images/website-images/@main.Url" />
 
-                            </select>
-                            <span class="text-danger" asp-validation-for="CategoryId"></span>
-                            </Div>
 
-                            <Div class="form-group">
-                                <label asp-for="TagIDs">Tags</label>
-                                <select asp-for="TagIDs" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))" class="form-group">
-                                </select>
-                                <span class="text-danger" asp-validation-for="TagIDs"></span>
-                            </Div>
+							</div>
+							<div class="form-group">
+								<label asp-for="MainPhoto">Main Image</label>
+								<input asp-for="MainPhoto" class="form-control" placeholder="Name" accept="image/*">
+								<span class="text-danger" asp-validation-for="MainPhoto"></span>
+							</div>
+							<div class="form-group">
 
-                            <Div class="form-group">
-                                <label asp-for="SizeIDs">Sizes</label>
-                                <select asp-for="SizeIDs" asp-items="new SelectList(Model.Sizes,nameof(Size.Id),nameof(Size.Name))" class="form-group">
-                                </select>
-                                <span class="text-danger" asp-validation-for="SizeIDs"></span>
-                            </Div>
+								<img style="width:150px; height:150px;" src="~/assets/images/website-images/@hover.Url" />
 
-                            <Div class="form-group">
-                                <label asp-for="ColorIDs">Colors</label>
-                                <select asp-for="ColorIDs" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))" class="form-group">
-                                </select>
-                                <span class="text-danger" asp-validation-for="ColorIDs"></span>
-                            </Div>
 
-                            <button type="submit" class="btn btn-primary me-2">Submit</button>
-                            <button class="btn btn-light">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+							</div>
+							<div class="form-group">
+								<label asp-for="HoverPhoto">Hover Image</label>
+								<input asp-for="HoverPhoto" class="form-control" placeholder="Name" accept="image/*">
+								<span class="text-danger" asp-validation-for="HoverPhoto"></span>
+							</div>
+							<div class="form-group d-flex">
+								@foreach (ProductImage image in Model.ProductImages.Where(pi => pi.IsPrimary == null))
+								{
+									<div>
 
-        </div>
-    </div>
+										<img style="width:150px; height:150px;" src="~/assets/images/website-images/@image.Url" />
+
+
+									</div>
+								}
+								
+							</div>
+							<div class="form-group">
+								<label asp-for="Photos">Additional Images</label>
+								<input asp-for="Photos" class="form-control" placeholder="Name" accept="image/*">
+								<span class="text-danger" asp-validation-for="Photos"></span>
+							</div>
+
+							<div class="form-group">
+								<label asp-for="Name">Name</label>
+								<input asp-for="Name" class="form-control" placeholder="Name">
+								<span class="text-danger" asp-validation-for="Name"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="Price">Price</label>
+								<input asp-for="Price" class="form-control" placeholder="Price">
+								<span class="text-danger" asp-validation-for="Price"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="Description">Description</label>
+								<input asp-for="Description" class="form-control" placeholder="Description">
+								<span class="text-danger" asp-validation-for="Description"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="SKU">SKU</label>
+								<input asp-for="SKU" class="form-control" placeholder="SKU">
+								<span class="text-danger" asp-validation-for="SKU"></span>
+							</div>
+							<Div class="form-group">
+								<label asp-for="CategoryId">Category</label>
+								<select asp-for="CategoryId" asp-items="new SelectList(Model.Categories,nameof(Category.Id),nameof(Category.Name))" class="form-group">
+								</select>
+								<span class="text-danger" asp-validation-for="CategoryId"></span>
+							</Div>
+
+							<Div class="form-group">
+								<label asp-for="TagIDs">Tags</label>
+								<select asp-for="TagIDs" asp-items="new SelectList(Model.Tags,nameof(Tag.Id),nameof(Tag.Name))" class="form-group">
+								</select>
+								<span class="text-danger" asp-validation-for="TagIDs"></span>
+							</Div>
+
+							<Div class="form-group">
+								<label asp-for="SizeIDs">Sizes</label>
+								<select asp-for="SizeIDs" asp-items="new SelectList(Model.Sizes,nameof(Size.Id),nameof(Size.Name))" class="form-group">
+								</select>
+								<span class="text-danger" asp-validation-for="SizeIDs"></span>
+							</Div>
+
+							<Div class="form-group">
+								<label asp-for="ColorIDs">Colors</label>
+								<select asp-for="ColorIDs" asp-items="new SelectList(Model.Colors,nameof(Color.Id),nameof(Color.Name))" class="form-group">
+								</select>
+								<span class="text-danger" asp-validation-for="ColorIDs"></span>
+							</Div>
+
+							<button type="submit" class="btn btn-primary me-2">Submit</button>
+							<button class="btn btn-light">Cancel</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </div>
