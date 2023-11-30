@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
+using testPronia.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer("server=DESK
 
 var app = builder.Build();
 
+builder.Services.AddScoped<LayoutService>();
 app.UseStaticFiles();
 app.UseRouting();
 
