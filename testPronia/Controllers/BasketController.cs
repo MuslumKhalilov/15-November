@@ -17,7 +17,28 @@ namespace testPronia.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(Request.Cookies["Basket"]);
+            List<BasketItemVM> basketItems = new List<BasketItemVM>();
+            foreach (BasketCookieItemVM item in basket)
+            {
+                Product product = _context.Products.Include(p=>p.ProductImages.Where(pi=>pi.IsPrimary==true)).FirstOrDefault(p=>p.Id==item.Id);
+                if (product != null)
+                {
+                    BasketItemVM itemVM = new BasketItemVM()
+                    {
+                        Id = item.Id,
+                        Count = item.Count,
+                        Price = product.Price,
+                        Image = product.ProductImages.FirstOrDefault().Url,
+                        Name = product.Name,
+                        Subtotal = item.Count * product.Price
+
+                    };
+                    basketItems.Add(itemVM);
+                }
+            }
+
+            return View(basketItems);
         }
 
         public async Task<IActionResult> AddBasket(int id)
