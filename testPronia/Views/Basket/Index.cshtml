@@ -71,12 +71,12 @@
 													<input class="cart-plus-minus-box"
 														   value="@item.Count"
 														   type="text" />
-													<div class="dec qtybutton">
+													<a class="dec qtybutton">
 														<i class="fa fa-minus"></i>
-													</div>
-													<div class="inc qtybutton">
+													</a>
+													<a asp-controller="Basket" asp-action="PlusCount" asp-route-id="@item.Id" >
 														<i class="fa fa-plus"></i>
-													</div>
+													</a>
 												</div>
 											</td>
 											<td class="product-subtotal">

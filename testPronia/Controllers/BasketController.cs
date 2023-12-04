@@ -89,5 +89,13 @@ namespace testPronia.Controllers
         {
             return Content(Request.Cookies["Basket"]);
         }
+
+        public IActionResult PlusCount(int id)
+        {
+            List<BasketCookieItemVM> basketCookieItemVMs = new List<BasketCookieItemVM>();
+            BasketCookieItemVM basketCookieItemVM = basketCookieItemVMs.FirstOrDefault(b => b.Id == id);
+            basketCookieItemVM.Count++;
+            return View();
+        }
     }
 }
