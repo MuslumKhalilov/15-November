@@ -22,12 +22,13 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(option =>
 	option.Lockout.MaxFailedAccessAttempts = 3;
 	option.Lockout.DefaultLockoutTimeSpan= TimeSpan.FromMinutes(3);
 
-});
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<LayoutService>();
 var app = builder.Build();
 
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
 
