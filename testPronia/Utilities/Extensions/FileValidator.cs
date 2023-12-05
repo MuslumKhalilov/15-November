@@ -57,15 +57,11 @@ namespace testPronia.Utilities.Extensions
 				File.Delete(path);
 			}
 		}
-		public static bool ValidateEmail(string email)
+		public static void StringFormat(string Name)
 		{
-            string regex = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
-			Regex regex1 = new Regex(regex);
-			if (regex1.IsMatch(email))
-			{
-				return true;
-			}
-			return false;
+           string Name1= char.ToUpper(Name[0]) + Name.Substring(1);
+			Name1.Trim();
+			
         }
 
 	}

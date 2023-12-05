@@ -35,6 +35,7 @@ namespace testPronia.Controllers
             {
 				ModelState.AddModelError("Email","Email dogru sekilde deyil");   
 			}
+			
             
 
             AppUser user = new AppUser()
