@@ -48,6 +48,18 @@
                                     <input asp-for="Email" placeholder="Email" />
                                     <span class="text-danger" asp-validation-for="Email"></span>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <label asp-for="Gender">Male</label>
+                                    <input value="Male" type="radio" asp-for="Gender" placeholder="Gender" />
+                                    <span class="text-danger" asp-validation-for="Gender"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label asp-for="Gender">Female</label>
+                                    <input value="Female" type="radio" asp-for="Gender" placeholder="Gender" />
+                                    <span class="text-danger" asp-validation-for="Gender"></span>
+                                </div>
+
                                 <div class="col-md-6">
                                     <label asp-for="Password">Password</label>
                                     <input asp-for="Password" placeholder="Password" />

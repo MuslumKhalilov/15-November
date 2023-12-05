@@ -43,7 +43,8 @@ namespace testPronia.Controllers
 				Name = registerVM.Name,
 				Surname = registerVM.Surname,
 				UserName = registerVM.Username,
-				Email = registerVM.Email
+				Email = registerVM.Email,
+				Gender = registerVM.Gender
 			};
 
 			IdentityResult result= await _userManagaer.CreateAsync(user,registerVM.Password);
