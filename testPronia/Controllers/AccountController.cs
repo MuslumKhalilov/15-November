@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using testPronia.Models;
 using testPronia.ModelViews;
 
@@ -47,5 +48,11 @@ namespace testPronia.Controllers
 			await _signInManager.SignInAsync(user,false);
 			return RedirectToAction("Index", "Home");
 		}
+		public async Task<IActionResult> LogOut()
+		{
+			_signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Home");
+		}
+		
 	}
 }
