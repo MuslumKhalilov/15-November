@@ -1,4 +1,6 @@
-﻿namespace testPronia.Utilities.Extensions
+﻿using System.Text.RegularExpressions;
+
+namespace testPronia.Utilities.Extensions
 {
 	public static class FileValidator
 	{
@@ -20,6 +22,7 @@
 			}
 
 			return false;
+			
 		}
 
 		public static async Task<string> CreateFile(this IFormFile file, string root, params string[] folders)
@@ -38,7 +41,7 @@
 			}
 
 			return fileName;
-
+			
 		}
 
 		public static async void DeleteFile(this string fileName, string root, params string[] folders)
@@ -54,6 +57,16 @@
 				File.Delete(path);
 			}
 		}
+		public static bool ValidateEmail(string email)
+		{
+            string regex = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+			Regex regex1 = new Regex(regex);
+			if (regex1.IsMatch(email))
+			{
+				return true;
+			}
+			return false;
+        }
 
 	}
 }

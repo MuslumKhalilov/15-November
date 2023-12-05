@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using testPronia.Models;
@@ -28,7 +29,15 @@ namespace testPronia.Controllers
 			{
 				return View();
 			}
-			AppUser user = new AppUser()
+            string regex = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+            Regex regex1 = new Regex(regex);
+            if (!regex1.IsMatch(registerVM.Email))
+            {
+				ModelState.AddModelError("Email","Email dogru sekilde deyil");   
+			}
+            
+
+            AppUser user = new AppUser()
 			{
 				Name = registerVM.Name,
 				Surname = registerVM.Surname,
