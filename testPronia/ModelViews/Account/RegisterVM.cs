@@ -26,6 +26,6 @@ namespace testPronia.ModelViews
 		[Required]
 		[DataType(DataType.EmailAddress)]
 		public string Email { get; set; }
-		public string Gender { get; set; }
+		//public string Gender { get; set; }
 	}
 }

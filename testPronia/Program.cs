@@ -29,8 +29,8 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseStaticFiles();
 app.UseRouting();
+app.UseStaticFiles();
 
 app.MapControllerRoute("default", "{area:exists}/{controller=home}/{action=index}/{id?}");
 
