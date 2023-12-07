@@ -26,10 +26,10 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(option =>
 
 builder.Services.AddScoped<LayoutService>();
 var app = builder.Build();
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseRouting();
+
 app.UseStaticFiles();
 
 app.MapControllerRoute("default", "{area:exists}/{controller=home}/{action=index}/{id?}");

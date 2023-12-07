@@ -68,7 +68,7 @@ namespace testPronia.Controllers;
 		return View();
 	}
 	[HttpPost]
-    public async Task<IActionResult> Login(LoginVM loginVM)
+    public async Task<IActionResult> Login(LoginVM loginVM, string? returnUrl)
     {
 		if (!ModelState.IsValid)
 		{
@@ -95,6 +95,11 @@ namespace testPronia.Controllers;
 			ModelState.AddModelError(String.Empty, "UserName, Email or Password is incorrect");
 			return View();
 		}
-		return RedirectToAction("Index", "Home");
-    }
+		if ( returnUrl is null)
+		{
+			return RedirectToAction("Index", "Home");
+		}
+		return Redirect(returnUrl);
+
+	}
 }
