@@ -84,8 +84,13 @@ namespace testPronia.Controllers;
 				return View();
 			}
 		}
-		var result= _signInManager.PasswordSignInAsync(user,loginVM.Password,loginVM.IsRemembered,true);
-		if (!result.IsCompletedSuccessfully)
+		var result=await _signInManager.PasswordSignInAsync(user,loginVM.Password,loginVM.IsRemembered,true);
+		if (result.IsLockedOut)
+		{
+			ModelState.AddModelError(String.Empty,"Your account is locked. Please try again later.");
+		}
+		
+		if (!result.Succeeded)
 		{
 			ModelState.AddModelError(String.Empty, "UserName, Email or Password is incorrect");
 			return View();
