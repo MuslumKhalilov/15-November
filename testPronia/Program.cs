@@ -24,7 +24,10 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(option =>
 
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+
 builder.Services.AddScoped<LayoutService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
 app.UseRouting();
 app.UseAuthentication();
