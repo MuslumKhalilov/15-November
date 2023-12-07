@@ -17,26 +17,31 @@ namespace testPronia.Controllers
         }
         public IActionResult Index()
         {
-            List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(Request.Cookies["Basket"]);
-            List<BasketItemVM> basketItems = new List<BasketItemVM>();
-            foreach (BasketCookieItemVM item in basket)
-            {
-                Product product = _context.Products.Include(p=>p.ProductImages.Where(pi=>pi.IsPrimary==true)).FirstOrDefault(p=>p.Id==item.Id);
-                if (product != null)
-                {
-                    BasketItemVM itemVM = new BasketItemVM()
-                    {
-                        Id = item.Id,
-                        Count = item.Count,
-                        Price = product.Price,
-                        Image = product.ProductImages.FirstOrDefault().Url,
-                        Name = product.Name,
-                        Subtotal = item.Count * product.Price
+			List<BasketItemVM> basketItems = new List<BasketItemVM>();
 
-                    };
-                    basketItems.Add(itemVM);
-                }
-            }
+            if (Request.Cookies["Basket"] is not null)
+            {
+				List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(Request.Cookies["Basket"]);
+
+				foreach (BasketCookieItemVM item in basket)
+				{
+					Product product = _context.Products.Include(p => p.ProductImages.Where(pi => pi.IsPrimary == true)).FirstOrDefault(p => p.Id == item.Id);
+					if (product != null)
+					{
+						BasketItemVM itemVM = new BasketItemVM()
+						{
+							Id = item.Id,
+							Count = item.Count,
+							Price = product.Price,
+							Image = product.ProductImages.FirstOrDefault().Url,
+							Name = product.Name,
+							Subtotal = item.Count * product.Price
+
+						};
+						basketItems.Add(itemVM);
+					}
+				}
+			}
 
             return View(basketItems);
         }
@@ -96,6 +101,15 @@ namespace testPronia.Controllers
             BasketCookieItemVM basketCookieItemVM = basketCookieItemVMs.FirstOrDefault(b => b.Id == id);
             basketCookieItemVM.Count++;
             return View();
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            List<BasketCookieItemVM> basketCookieItems =  JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(Request.Cookies["Basket"]);
+            BasketCookieItemVM itemVM = basketCookieItems.FirstOrDefault(b => b.Id == id);
+            basketCookieItems.Remove(itemVM);
+            string json = JsonConvert.SerializeObject(basketCookieItems);
+            Response.Cookies.Append("Basket", json);
+            return RedirectToAction("Index","Basket");
         }
     }
 }
