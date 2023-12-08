@@ -19,30 +19,56 @@ namespace testPronia.Controllers
             _context = context;
 			_userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 			List<BasketItemVM> basketItems = new List<BasketItemVM>();
-
-            if (Request.Cookies["Basket"] is not null)
-            {
-				List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(Request.Cookies["Basket"]);
-
-				foreach (BasketCookieItemVM item in basket)
-				{
-					Product product = _context.Products.Include(p => p.ProductImages.Where(pi => pi.IsPrimary == true)).FirstOrDefault(p => p.Id == item.Id);
-					if (product != null)
+			
+			if (User.Identity.IsAuthenticated)
+			{
+				AppUser? user = await  _userManager.Users
+					.Include(u=>u.BasketItems)
+					.ThenInclude(bi=>bi.Product)
+					.ThenInclude(p=>p.ProductImages.Where(pi=>pi.IsPrimary==true))
+					.FirstOrDefaultAsync(u=>u.Id==User.FindFirstValue(ClaimTypes.NameIdentifier));
+                foreach (BasketItem item in user.BasketItems)
+                {
+					BasketItemVM itemVM = new BasketItemVM()
 					{
-						BasketItemVM itemVM = new BasketItemVM()
-						{
-							Id = item.Id,
-							Count = item.Count,
-							Price = product.Price,
-							Image = product.ProductImages.FirstOrDefault().Url,
-							Name = product.Name,
-							Subtotal = item.Count * product.Price
+						Name= item.Product.Name,
+						Price= item.Price,
+						Count = item.Count,
+						Id=item.Id,
+						Subtotal = item.Price * item.Count,
+						Image = item.Product.ProductImages.FirstOrDefault()?.Url
+					};
+					basketItems.Add(itemVM);
+                }
 
-						};
-						basketItems.Add(itemVM);
+
+            }
+			else
+			{
+				if (Request.Cookies["Basket"] is not null)
+				{
+					List<BasketCookieItemVM> basket = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(Request.Cookies["Basket"]);
+
+					foreach (BasketCookieItemVM item in basket)
+					{
+						Product product = _context.Products.Include(p => p.ProductImages.Where(pi => pi.IsPrimary == true)).FirstOrDefault(p => p.Id == item.Id);
+						if (product != null)
+						{
+							BasketItemVM itemVM = new BasketItemVM()
+							{
+								Id = item.Id,
+								Count = item.Count,
+								Price = product.Price,
+								Image = product.ProductImages.FirstOrDefault().Url,
+								Name = product.Name,
+								Subtotal = item.Count * product.Price
+
+							};
+							basketItems.Add(itemVM);
+						}
 					}
 				}
 			}
