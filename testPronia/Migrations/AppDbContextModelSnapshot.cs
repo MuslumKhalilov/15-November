@@ -228,6 +228,41 @@ namespace testPronia.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("testPronia.Models.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketItems");
+                });
+
             modelBuilder.Entity("testPronia.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -261,6 +296,19 @@ namespace testPronia.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("testPronia.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("testPronia.Models.Product", b =>
@@ -535,6 +583,31 @@ namespace testPronia.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("testPronia.Models.BasketItem", b =>
+                {
+                    b.HasOne("testPronia.Models.AppUser", "AppUser")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("testPronia.Models.Order", "Order")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("testPronia.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("testPronia.Models.Product", b =>
                 {
                     b.HasOne("testPronia.Models.Category", "Category")
@@ -612,6 +685,11 @@ namespace testPronia.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("testPronia.Models.AppUser", b =>
+                {
+                    b.Navigation("BasketItems");
+                });
+
             modelBuilder.Entity("testPronia.Models.Category", b =>
                 {
                     b.Navigation("Products");
@@ -620,6 +698,11 @@ namespace testPronia.Migrations
             modelBuilder.Entity("testPronia.Models.Color", b =>
                 {
                     b.Navigation("ProductColors");
+                });
+
+            modelBuilder.Entity("testPronia.Models.Order", b =>
+                {
+                    b.Navigation("BasketItems");
                 });
 
             modelBuilder.Entity("testPronia.Models.Product", b =>

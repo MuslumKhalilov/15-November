@@ -24,6 +24,8 @@ namespace testPronia.DAL
         public DbSet<Size> Sizes {  get; set; }  
         public DbSet<Category> Category { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
 
 
 
