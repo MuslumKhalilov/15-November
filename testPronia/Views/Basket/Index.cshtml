@@ -44,15 +44,31 @@
 										total +=item.Subtotal;
 										<tr>
 											<td class="product_remove">
-												<a asp-controller="Basket" asp-action="Delete" asp-route-id="@item.Id">
-													<i class="pe-7s-close"
-													   data-tippy="Remove"
-													   data-tippy-inertia="true"
-													   data-tippy-animation="shift-away"
-													   data-tippy-delay="50"
-													   data-tippy-arrow="true"
-													   data-tippy-theme="sharpborder"></i>
-												</a>
+												@if(User.Identity.IsAuthenticated)
+												{
+													<a asp-controller="Basket" asp-action="DeleteFromDb" asp-route-id="@item.Id">
+														<i class="pe-7s-close"
+														   data-tippy="Remove"
+														   data-tippy-inertia="true"
+														   data-tippy-animation="shift-away"
+														   data-tippy-delay="50"
+														   data-tippy-arrow="true"
+														   data-tippy-theme="sharpborder"></i>
+													</a>
+												}
+												else
+												{
+													<a asp-controller="Basket" asp-action="Delete" asp-route-id="@item.Id">
+														<i class="pe-7s-close"
+														   data-tippy="Remove"
+														   data-tippy-inertia="true"
+														   data-tippy-animation="shift-away"
+														   data-tippy-delay="50"
+														   data-tippy-arrow="true"
+														   data-tippy-theme="sharpborder"></i>
+													</a>
+												}
+												
 											</td>
 											<td class="product-thumbnail">
 												<a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">

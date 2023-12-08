@@ -168,5 +168,15 @@ namespace testPronia.Controllers
             Response.Cookies.Append("Basket", json);
             return RedirectToAction("Index","Basket");
         }
+		public async Task<IActionResult> DeleteFromDb(int id)
+		{			
+			BasketItem item = await _context.BasketItems.FirstOrDefaultAsync(i => i.Id == id);
+			if (item == null) return NotFound();
+			_context.BasketItems.Remove(item);
+			await _context.SaveChangesAsync();
+			return RedirectToAction("Index","Basket");
+			
+			
+		}
     }
 }
