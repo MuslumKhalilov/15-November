@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -56,16 +57,26 @@ namespace testPronia.Controllers
             if (product == null) return NotFound();
             if (User.Identity.IsAuthenticated)
             {
-				AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+				AppUser user = await _userManager.Users.Include(u=>u.BasketItems).FirstOrDefaultAsync(u=>u.Id==User.FindFirst(ClaimTypes.NameIdentifier).Value);
 				if (user is null) { return NotFound(); }
-				BasketItem basketItem = new BasketItem()
+				BasketItem basket= user.BasketItems.FirstOrDefault(bi => bi.ProductId == id);
+				if (basket is null)
 				{
-					AppUserId = user.Id,
-					ProductId = product.Id,
-					Count = 1,
-					Price = product.Price
-				};
-				_context.BasketItems.AddAsync(basketItem);
+					basket = new BasketItem()
+					{
+						AppUserId = user.Id,
+						ProductId = product.Id,
+						Count = 1,
+						Price = product.Price
+					};
+					_context.BasketItems.AddAsync(basket);
+				}
+				else
+				{
+					basket.Count++;
+				}
+			
+				
 				await _context.SaveChangesAsync();
             }
             else
