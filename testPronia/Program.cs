@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
+using testPronia.Interfaces;
 using testPronia.Models;
 using testPronia.Services;
 
@@ -26,6 +27,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(option =>
 
 
 builder.Services.AddScoped<LayoutService>();
+builder.Services.AddScoped<IEmailService,EmailService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();

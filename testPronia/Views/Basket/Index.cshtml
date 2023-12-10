@@ -41,10 +41,10 @@
 								<tbody>
 									@foreach (BasketItemVM item in Model)
 									{
-										total +=item.Subtotal;
+										total += item.Subtotal;
 										<tr>
 											<td class="product_remove">
-												@if(User.Identity.IsAuthenticated)
+												@if (User.Identity.IsAuthenticated)
 												{
 													<a asp-controller="Basket" asp-action="DeleteFromDb" asp-route-id="@item.Id">
 														<i class="pe-7s-close"
@@ -68,7 +68,7 @@
 														   data-tippy-theme="sharpborder"></i>
 													</a>
 												}
-												
+
 											</td>
 											<td class="product-thumbnail">
 												<a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
@@ -90,7 +90,7 @@
 													<a class="dec qtybutton">
 														<i class="fa fa-minus"></i>
 													</a>
-													<a asp-controller="Basket" asp-action="PlusCount" asp-route-id="@item.Id" >
+													<a asp-controller="Basket" asp-action="PlusCount" asp-route-id="@item.Id">
 														<i class="fa fa-plus"></i>
 													</a>
 												</div>
@@ -100,7 +100,7 @@
 											</td>
 										</tr>
 									}
-									
+
 								</tbody>
 							</table>
 						</div>
@@ -133,7 +133,7 @@
 								<div class="cart-page-total">
 									<h2>Cart totals</h2>
 									<ul>
-										
+
 										<li>Total <span>$@total</span></li>
 									</ul>
 									<a href="#">Proceed to checkout</a>
@@ -146,3 +146,4 @@
 		</div>
 	</div>
 </main>
+
