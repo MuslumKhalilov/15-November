@@ -178,5 +178,9 @@ namespace testPronia.Controllers
 			
 			
 		}
+		public IActionResult Checkout()
+		{
+			return View();
+		}
     }
 }
