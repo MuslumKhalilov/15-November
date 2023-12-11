@@ -9,6 +9,7 @@ using testPronia.DAL;
 using testPronia.Interfaces;
 using testPronia.Models;
 using testPronia.ModelViews;
+using testPronia.Utilities.Enums;
 
 namespace testPronia.Controllers
 {
@@ -17,12 +18,14 @@ namespace testPronia.Controllers
 		private readonly AppDbContext _context;
 		private readonly UserManager<AppUser> _userManager;
 		private readonly IEmailService _emailService;
+		private readonly RoleManager<IdentityRole> _roleManager;
 
-		public BasketController(AppDbContext context, UserManager<AppUser> userManager, IEmailService emailService)
+		public BasketController(AppDbContext context, UserManager<AppUser> userManager, IEmailService emailService, RoleManager<IdentityRole> roleManager)
 		{
 			_context = context;
 			_userManager = userManager;
 			_emailService = emailService;
+			_roleManager= roleManager;
 		}
 		public async Task<IActionResult> Index()
 		{
@@ -244,6 +247,22 @@ namespace testPronia.Controllers
 
 			await _emailService.SendMailAsync(user.Email, "Your order",body,true);
 
+			return RedirectToAction("Index", "Home");
+		}
+		public async Task<IActionResult> CreateRole()
+		{
+			
+			foreach (UserRole item in Enum.GetValues(typeof(UserRole)))
+			{
+				if (!(await _roleManager.RoleExistsAsync(item.ToString())))
+				{
+					await _roleManager.CreateAsync(new IdentityRole
+					{
+						Name = item.ToString()
+					});
+				}
+					
+			}
 			return RedirectToAction("Index", "Home");
 		}
 	}
