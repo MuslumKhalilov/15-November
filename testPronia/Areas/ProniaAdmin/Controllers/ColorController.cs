@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
@@ -21,6 +22,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 			return View(colors);
 		}
+		[Authorize(Roles = "Admin,Moderator")]
 		public IActionResult Create()
 		{
 			return View();
@@ -46,7 +48,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			return RedirectToAction(nameof(Index));
 
 		}
-
+		[Authorize(Roles = "Admin")]
 		async public Task<IActionResult> Delete(int id)
 		{
 			if (id <= 0) return BadRequest();
@@ -57,7 +59,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			return RedirectToAction(nameof(Index));
 
 		}
-
+		[Authorize(Roles = "Admin,Moderator")]
 		public async Task<IActionResult> Update(int id)
 		{
 			if (id <= 0) return BadRequest();
@@ -84,9 +86,9 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 		}
 
-       
 
-        public async Task<IActionResult> Details(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Details(int id)
         {
 
             List<ProductColor> productColors = await _context.ProductColors.Include(pc => pc.Product.ProductImages).Where(c => c.ColorId == id).ToListAsync();

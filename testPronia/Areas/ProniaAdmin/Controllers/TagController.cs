@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
 using testPronia.Models;
@@ -19,6 +20,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			List<Tag> tags = await _context.Tags.Include(t => t.ProductTags).ToListAsync();
 			return View(tags);
 		}
+		[Authorize(Roles = "Admin,Moderator")]
 		public IActionResult Create()
 		{
 			return View();
@@ -44,7 +46,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 			return RedirectToAction("Index");
 		}
-
+		[Authorize(Roles = "Admin,Moderator")]
 		public async Task<IActionResult> Update(int id)
 		{
 			if (id <= 0) return BadRequest();
@@ -70,7 +72,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			return RedirectToAction(nameof(Index));
 
 		}
-
+		[Authorize(Roles = "Admin")]
 		async public Task<IActionResult> Delete(int id)
 		{
 			if (id <= 0) return BadRequest();
@@ -84,7 +86,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 
 		}
-        public async Task<IActionResult> Details(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Details(int id)
         {
 
 			List<ProductTag> productTags = await _context.ProductTags.Include(pt => pt.Product.ProductImages).Where(t => t.TagId == id).ToListAsync();

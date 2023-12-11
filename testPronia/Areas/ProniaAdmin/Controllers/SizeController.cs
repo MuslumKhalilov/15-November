@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
 using testPronia.Models;
@@ -20,8 +21,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             List<Size> sizes = _context.Sizes.ToList();
             return View(sizes);
         }
-
-        public IActionResult Create()
+		[Authorize(Roles = "Admin,Moderator")]
+		public IActionResult Create()
         {
             return View();
         }
@@ -46,8 +47,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-
-        async public Task<IActionResult> Delete(int id)
+		[Authorize(Roles = "Admin")]
+		async public Task<IActionResult> Delete(int id)
         {
             if (id <= 0) return BadRequest();
             Size existed = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
@@ -57,8 +58,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-
-        public async Task<IActionResult> Update(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Update(int id)
         {
             if (id <= 0) return BadRequest();
             Size size = await _context.Sizes.FirstOrDefaultAsync(s => s.Id == id);
@@ -85,8 +86,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         }
 
 
-
-        public async Task<IActionResult> Details(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Details(int id)
         {
 
             List<ProductSize> productSizes = await _context.ProductSizes.Include(ps => ps.Product.ProductImages).Where(s => s.SizeId == id).ToListAsync();

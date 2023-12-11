@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using testPronia.Areas.ViewModels;
@@ -27,6 +28,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             List<Slide> slides = _context.Slides.ToList();
 			return View(slides);
 		}
+		[Authorize(Roles = "Admin,Moderator")]
 		public IActionResult Create()
 		{
 			return View();
@@ -77,13 +79,13 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
-
+		[Authorize(Roles = "Admin,Moderator")]
 		public async Task<IActionResult> Details(int id)
 		{
 			Slide slide= await _context.Slides.FirstOrDefaultAsync(s => s.Id == id);
 			return View(slide);
 		}
-
+		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			if (id <= 0)
@@ -97,6 +99,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 			return RedirectToAction(nameof(Index));
 
 		}
+		[Authorize(Roles = "Admin,Moderator")]
 		public async Task<IActionResult> Update(int id)
 		{
 			if (id <= 0) { return BadRequest(); }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using testPronia.Areas.ViewModels;
 using testPronia.DAL;
@@ -30,7 +31,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return View(products);
         }
 
-
+		[Authorize(Roles = "Admin,Moderator")]
 		public async Task<IActionResult> Create()
 		{
 			ViewBag.Categories= await _context.Category.ToListAsync();
@@ -212,6 +213,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 			return RedirectToAction(nameof(Index));
 		}
+		[Authorize(Roles = "Admin,Moderator")]
 		public async Task<IActionResult> Details(int id)
 		{
 			Product product = await _context.Products.Include(p=>p.ProductColors.FirstOrDefault(pc=>pc.ProductId==id))
@@ -219,7 +221,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 			return View();
 		}
-        public async Task<IActionResult> Update(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Update(int id)
         {
             if (id <= 0) return BadRequest();
             Product product = await _context.Products.Include(p=>p.ProductImages).Include(p=>p.ProductColors).Include(p=>p.ProductSizes).Include(p=>p.ProductTags).FirstOrDefaultAsync(p=>p.Id==id);
@@ -434,8 +437,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> Delete(int id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0) return BadRequest();
             Product existed = await _context.Products.Include(p=>p.ProductImages).FirstOrDefaultAsync(p => p.Id == id);

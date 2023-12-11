@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
@@ -21,12 +22,14 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             List<Category> categories = await _context.Category.Include(c=> c.Products).ToListAsync();
             return View(categories);
         }
+        [Authorize(Roles ="Admin,Moderator")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        
         public async Task<IActionResult> Create(Category category)
         {
             if (!ModelState.IsValid)
@@ -46,7 +49,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction(nameof(Index));
             
         }
-        public async Task<IActionResult> Update(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Update(int id)
         {
             if (id <= 0) return BadRequest();
             Category category = await _context.Category.FirstOrDefaultAsync(c => c.Id == id);
@@ -71,8 +75,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-
-        async public Task<IActionResult> Delete(int id)
+		[Authorize(Roles = "Admin")]
+		async public Task<IActionResult> Delete(int id)
         {
             if (id <=0) return BadRequest();
             Category existed = await _context.Category.FirstOrDefaultAsync(c => c.Id==id);
@@ -85,8 +89,8 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
 
 
         }
-
-        public async Task<IActionResult> Details(int id)
+		[Authorize(Roles = "Admin,Moderator")]
+		public async Task<IActionResult> Details(int id)
         {
             Category category = await _context.Category.FirstOrDefaultAsync(c => c.Id==id);
             List<Product> products = await _context.Products.Include(p=>p.ProductImages).Where(p=> p.CategoryId==id).ToListAsync();
