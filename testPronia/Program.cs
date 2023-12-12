@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using testPronia.DAL;
 using testPronia.Interfaces;
+using testPronia.Middlewares;
 using testPronia.Models;
 using testPronia.Services;
 
@@ -36,6 +37,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.MapControllerRoute("default", "{area:exists}/{controller=home}/{action=index}/{id?}");
 
