@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using testPronia.Areas.ViewModels;
 using testPronia.DAL;
 using testPronia.Models;
 
@@ -17,10 +18,25 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page)
         {
-            List<Category> categories = await _context.Category.Include(c=> c.Products).ToListAsync();
-            return View(categories);
+            double count = await _context.Category.CountAsync();
+			if (page < 0)
+			{
+				return BadRequest();
+			}
+			else if (page > Math.Ceiling(count / 3))
+			{
+				return NotFound();
+			}
+			List<Category> categories = await _context.Category.Skip(page*3).Take(3).Include(c=> c.Products).ToListAsync();
+            PaginateVM<Category> paginateVM = new PaginateVM<Category>()
+            {
+                CurrentPage = page + 1,
+                TotalPage = Math.Ceiling(count / 3),
+                Items = categories
+            };
+            return View(paginateVM);
         }
         [Authorize(Roles ="Admin,Moderator")]
         public IActionResult Create()
