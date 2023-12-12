@@ -1,6 +1,6 @@
-﻿@model List<Tag>
+﻿@model PaginateVM<Tag>
 @{
-	int count = 0;
+	int count = (Model.CurrentPage-1)*3;
 }
 <div class="main-panel">
 	<div class="content-wrapper">
@@ -28,7 +28,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach (Tag tag in Model)
+									@foreach (Tag tag in Model.Items)
 									{
 										count++;
 										<tr>
@@ -51,6 +51,17 @@
 									}
 							</table>
 						</div>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item @(Model.CurrentPage==1?"disabled":"")"><a class="page-link" asp-controller="Tag" asp-action="Index" asp-route-page="@(Model.CurrentPage-2)">Previous</a></li>
+								@for (int i = 1; i < Model.TotalPage; i++)
+								{
+									<li class="page-item @(i==Model.CurrentPage?"disabled":"")"><a class="page-link" asp-controller="Tag" asp-action="Index" asp-route-page="@(i-1)">@i</a></li>
+								}
+
+								<li class="page-item @(Model.CurrentPage==Model.TotalPage?"disabled":"")"><a class="page-link" asp-controller="Tag" asp-action="Index" asp-route-page="@(Model.CurrentPage)">Next</a></li>
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using testPronia.Areas.ViewModels;
 using testPronia.DAL;
 using testPronia.Models;
 
@@ -15,10 +16,25 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
         {
 			_context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page)
 		{
-			List<Tag> tags = await _context.Tags.Include(t => t.ProductTags).ToListAsync();
-			return View(tags);
+			double count = await _context.Tags.CountAsync();
+			if (page < 0)
+			{
+				return BadRequest();
+			}
+			else if (page > Math.Ceiling(count / 3))
+			{
+				return NotFound();
+			}
+			List<Tag> tags = await _context.Tags.Skip(page*3).Take(3).Include(t => t.ProductTags).ToListAsync();
+			PaginateVM<Tag> paginateVM = new PaginateVM<Tag>()
+			{
+				CurrentPage = page+1,
+				TotalPage = Math.Ceiling(count/3),
+				Items = tags
+			};
+			return View(paginateVM);
 		}
 		[Authorize(Roles = "Admin,Moderator")]
 		public IActionResult Create()
