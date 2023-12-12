@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using testPronia.Areas.ViewModels;
 using testPronia.DAL;
 using testPronia.Models;
@@ -20,15 +21,33 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             _env= env;  
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page)
         {
-             List<Product> products= await _context.Products
-                .Include(p=>p.ProductTags).ThenInclude(pt=>pt.Tag)
+			double count = await _context.Products.CountAsync();
+			if (page<0)
+			{
+				return BadRequest();
+			}
+			else if (page > Math.Ceiling(count / 3))
+			{
+				return NotFound();
+			}
+
+			ViewBag.PageCount = 6;
+			List<Product> products= await _context.Products
+				.Skip(3 * page).Take(3)
+				.Include(p=>p.ProductTags).ThenInclude(pt=>pt.Tag)
                 .Include(p=> p.Category)
                 .Include(p=> p.ProductImages
                 .Where(pi=>pi.IsPrimary==true)) .ToListAsync();
+			PaginateVM<Product> paginateVM = new PaginateVM<Product>()
+			{
+				TotalPage = Math.Ceiling(count / 3),
+				CurrentPage = page + 1,
+				Items = products
+		};
 
-            return View(products);
+            return View(paginateVM);
         }
 
 		[Authorize(Roles = "Admin,Moderator")]
@@ -454,6 +473,7 @@ namespace testPronia.Areas.ProniaAdmin.Controllers
             return RedirectToAction(nameof(Index));
             
         }
+		
 
 	}
 }
